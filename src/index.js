@@ -6,8 +6,7 @@ let addToy = false
 
 
 const addNewToy = (toy) => { //toy = event.target
-    debugger
-    const url = "http://localhost:3001/toys"
+    const url = "http://localhost:3000/toys"
     let configObjectPost = {
         method: "POST",
         headers: {
@@ -36,9 +35,9 @@ addNewToyButton.addEventListener('click', (event) => {
   if (addToy) {
     toyForm.style.display = 'block';
     //do something to capture the data and go to POST/
-    addToyForm.addEventListener('submit', e => {
+    addToyForm.addEventListener('submit', (e) => {
     	e.preventDefault()
-	    addNewToy(event.target)
+	    addNewToy(e.target)
 		})
   	} else {
     toyForm.style.display = 'none'
@@ -51,22 +50,15 @@ const getAllToys = () => {
 		.then(response => response.json())
 	
 		.then(json => listAllToys(json))
-		// .then(json => console.log(json))
 }
 
-//<div class='card'>
-// <h2> `${toy.name}` </h2>
-//<img src=`${data.image}` class="toy-avatar"></img>
-//<p> `${toy.likes} likes` </p>
-//<button class="like-btn">Like`</button>
-//</div
 
 const listAllToys = (toys) => {
 	toys.forEach(toy => createToyCard(toy))
 }
 
 const createToyCard = (toy) => {
-	//add for each toy in toy? 
+
 	let div = document.createElement('div')
 	div.classname = "card"
 
@@ -78,7 +70,7 @@ const createToyCard = (toy) => {
 	img.setAttribute('class', "toy-avatar")
 	
 	let p = document.createElement('p')
-	p.setAttribute('class', "toy-likes")
+	p.setAttribute('id', "number-of-likes")
 	p.innerHTML = `${toy.likes} likes`
 
 	let button = document.createElement('button')
@@ -97,12 +89,20 @@ const createToyCard = (toy) => {
 
 window.addEventListener('DOMContentLoaded', getAllToys)
 
-
- 
+// click button -- call updateLikes function, carry the event object over 
 
 
 const updateLikes = (event) => {
+
+	event.preventDefault()
+	const newLikes = parseInt(event.target.previousElementSibling.innerHTML) + 1;
+	let putLikesHere = document.querySelector('#number-of-likes')
+
+	console.log(event.target)
+	// console.log("event target: " , event.target) 
+	console.log("prevSibl: ", event.target.previousElementSibling.innerHTML)
 	const url = `http://localhost:3000/toys/${event.target.id}`
+	// console.log(url)
 	const configObjectPatch = {
         method: "PATCH",
         headers: {
@@ -110,22 +110,23 @@ const updateLikes = (event) => {
             "Accept": "application/json"
         },
         body: JSON.stringify({
-            'likes': '' //figure out how to capture current likes 
+            'likes': newLikes////figure out how to capture current likes 
         })
     }
-
+    console.log(newLikes)
 	fetch(url, configObjectPatch)
 		.then(response => response.json())
-		.then(data => howManyLikes(data))
+		.then(data => {
+			// event.target.previousElementSibling.innerHTML = `${newLikes} likes`
+			// why isn't newLikes coming in here? 
+			putLikesHere.innerHTML = `${newLikes} likes`
+		})
 
 }
 
-
-const howManyLikes = (data) => {
-	console.log(data.likes) 
-}
-
-
+// How to update the p/number right away -- why isn't it? 
+// I'm not always clear about what props and arguments
+//I'm passing from function to function. 
 
 
 	
