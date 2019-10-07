@@ -60,7 +60,9 @@ const listAllToys = (toys) => {
 const createToyCard = (toy) => {
 
 	let div = document.createElement('div')
-	div.classname = "card"
+	div.className = "card"
+	div.setAttribute('id', toy.id)
+	
 
 	let h2 = document.createElement('h2')
 	h2.innerText = `${toy.name}`
@@ -70,12 +72,13 @@ const createToyCard = (toy) => {
 	img.setAttribute('class', "toy-avatar")
 	
 	let p = document.createElement('p')
-	p.setAttribute('id', "number-of-likes")
+	p.setAttribute('class', "number-of-likes")
 	p.innerHTML = `${toy.likes} likes`
+	p.setAttribute('id', toy.id)
 
 	let button = document.createElement('button')
 	button.setAttribute('class', 'like-button')
-	button.setAttribute('id', toy.id)
+	// button.setAttribute('id', toy.id)
 	button.innerText = 'Like'
 	button.addEventListener('click', (event) => {
 		updateLikes(event)
@@ -93,16 +96,20 @@ window.addEventListener('DOMContentLoaded', getAllToys)
 
 
 const updateLikes = (event) => {
-
 	event.preventDefault()
-	const newLikes = parseInt(event.target.previousElementSibling.innerHTML) + 1;
-	let putLikesHere = document.querySelector('#number-of-likes')
-
+	const likes = event.target.previousElementSibling
+	const newLikes = parseInt(likes.innerHTML) + 1;
+	const id = likes.id
+	// const id = event.target.id
+	// let putLikesHere = document.getElementsByTagName(`p#${id}`)
+	
 	console.log(event.target)
+	console.log('id: ', event.target.id)
 	// console.log("event target: " , event.target) 
-	console.log("prevSibl: ", event.target.previousElementSibling.innerHTML)
-	const url = `http://localhost:3000/toys/${event.target.id}`
-	// console.log(url)
+	console.log("prevSibl: ", likes.innerHTML)
+	
+
+	const url = `http://localhost:3000/toys/${id}`
 	const configObjectPatch = {
         method: "PATCH",
         headers: {
@@ -116,17 +123,18 @@ const updateLikes = (event) => {
     console.log(newLikes)
 	fetch(url, configObjectPatch)
 		.then(response => response.json())
-		.then(data => {
+		.then(data => {(data.likes)
 			// event.target.previousElementSibling.innerHTML = `${newLikes} likes`
 			// why isn't newLikes coming in here? 
-			putLikesHere.innerHTML = `${newLikes} likes`
+			// const id = event.target.id
+			likes.innerHTML = `${newLikes} likes`
 		})
 
 }
 
 // How to update the p/number right away -- why isn't it? 
 // I'm not always clear about what props and arguments
-//I'm passing from function to function. 
+//I'm passing from function to function.
 
 
 	
