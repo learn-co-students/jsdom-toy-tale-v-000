@@ -56,6 +56,9 @@ button:hover {
   color: #e04b52;
 }
 
+
+
+
 .container {
   padding: 1rem;
   width: stretch;
@@ -96,4 +99,8 @@ button:hover {
   font-size: 18px;
   font-family: monospace;
   margin: 3px;
+}
+
+p.toy-likes {
+  font-family: 'Arial';
 }
