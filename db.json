@@ -4,37 +4,37 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 5
+      "likes": 9
     },
     {
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 8
+      "likes": 11
     },
     {
       "id": 3,
       "name": "Mr. Potato Head",
       "image": "https://vignette.wikia.nocookie.net/universe-of-smash-bros-lawl/images/d/d8/Mr-potato-head-toy-story.gif/revision/latest?cb=20151129131217",
-      "likes": 3
+      "likes": 4
     },
     {
       "id": 4,
       "name": "Slinky Dog",
       "image": "https://www.freeiconspng.com/uploads/slinky-png-transparent-1.png",
-      "likes": 4
+      "likes": 5
     },
     {
       "id": 5,
       "name": "Rex",
       "image": "http://umich.edu/~chemh215/W11HTML/SSG5/ssg5.2/FRex.png",
-      "likes": 1
+      "likes": 2
     },
     {
       "id": 6,
       "name": "Bo Peep",
       "image": "http://4.bp.blogspot.com/_OZHbJ8c71OM/Sog43CMFX2I/AAAAAAAADEs/0AKX0XslD4g/s400/bo.png",
-      "likes": 2
+      "likes": 3
     },
     {
       "id": 7,
@@ -47,6 +47,54 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "truck",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/81OLqPX0QyL._SL1500_.jpg",
+      "likes": 2,
+      "id": 9
+    },
+    {
+      "name": "another truck",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/81OLqPX0QyL._SL1500_.jpg",
+      "likes": 1,
+      "id": 10
+    },
+    {
+      "name": "third truck",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/81OLqPX0QyL._SL1500_.jpg",
+      "likes": 0,
+      "id": 11
+    },
+    {
+      "name": "garbage truck",
+      "image": "https://target.scene7.com/is/image/Target/GUEST_fc4aef97-7c0e-4c99-9d62-6dcfdefcd9c1?wid=488&hei=488&fmt=pjpeg",
+      "likes": 1,
+      "id": 12
+    },
+    {
+      "name": "garbage truck #2",
+      "image": "https://target.scene7.com/is/image/Target/GUEST_fc4aef97-7c0e-4c99-9d62-6dcfdefcd9c1?wid=488&hei=488&fmt=pjpeg",
+      "likes": 0,
+      "id": 13
+    },
+    {
+      "name": "third garbage truck",
+      "image": "https://target.scene7.com/is/image/Target/GUEST_fc4aef97-7c0e-4c99-9d62-6dcfdefcd9c1?wid=488&hei=488&fmt=pjpeg",
+      "likes": 0,
+      "id": 14
+    },
+    {
+      "name": "minion",
+      "image": "https://heavyeditorial.files.wordpress.com/2015/07/minion-dave.jpg?quality=65&strip=all&w=425",
+      "likes": 0,
+      "id": 15
+    },
+    {
+      "name": "excavator",
+      "image": "https://tshop.r10s.com/7bb/bd3/8f80/94f7/a023/8ee1/7f13/11d6e8b15854ab3a294904.jpg",
+      "likes": 0,
+      "id": 16
     }
   ]
 }
