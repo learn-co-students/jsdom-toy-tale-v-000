@@ -108,6 +108,5 @@ function increaseLikes(toy) {
   .then(response => response.json())
   .then((json => {
     p.innerHTML = `${toyLikes} Likes`;
-    return false;
   }))
 }
