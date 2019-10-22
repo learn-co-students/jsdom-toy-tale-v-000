@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
   fetchToys();
 })
 
-
+const toyUrl = "http://localhost:3000/toys";
 const addBtn = document.querySelector('#new-toy-btn')
 const toyForm = document.querySelector('.container')
 let addToy = false
@@ -26,7 +26,7 @@ addBtn.addEventListener('click', () => {
 // OR HERE!
 
 const fetchToys = () => {
-  const toyUrl = "http://localhost:3000/toys";
+  
   fetch(toyUrl)
     .then((response) => response.json())
     .then((json) => renderToys(json))
@@ -34,7 +34,7 @@ const fetchToys = () => {
 
 const renderToys = (toys) => {
   const toyCollection = document.getElementById('toy-collection');
-  console.log("toys", toys);
+  // console.log("toys", toys);
   toys.map((toy) => {
     // console.log("toy", toy)
     const toyDivCard = document.createElement('div');
@@ -62,16 +62,34 @@ const renderToys = (toys) => {
 
     toyCollection.appendChild(toyDivCard);
   })
-  // Object.keys(json).forEach((toy) => {
-  //   console.log(toy); //logs 0 in console or if toy["name"] or toy.name, it's undefined
-    // 
-    // toy = 
 }
 
-const addLike = function (likes) {
-  console.log("clicked");
+const addToyForm = document.querySelector('.add-toy-form');
 
-  const requestBody = {likes: likes};
+addToyForm.addEventListener('submit', function (event) {
+console.log(event.target.name.value);
+  fetch("http://localhost:3000/toys", {
+    method: "POST",
+    headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        "name": `${event.target.name.value}`,
+        "image": `${event.target.image.value}`,
+        "likes": 0
+      })
+  })
+    .then(response => response.json())
+    .then(json => console.log("new toy", json))
+    .catch((error) => console.log(error))
+})
+
+
+
+const addLike = function (event) {
+  event.preventDefault()
+  let numberOfLikes = parseInt(event.target.previousElementSibling.innerText) + 1;
 
   const configLikes = {
     method: "PATCH",
@@ -79,12 +97,14 @@ const addLike = function (likes) {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
-    body: JSON.stringify(requestBody)
+    body: JSON.stringify({
+      "likes": numberOfLikes
+    })
   }
 
-  return fetch("http://localhost:3000/toys/:id", configLikes)
-    .then((response) => response.text())
-    .then((json) => {
-      console.log(document.getElementById("p"));
-    })
+  fetch("http://localhost:3000/toys/:id", configLikes)
+    .then(response => response.json())
+    .then((like-obj => {
+      event.target.previousElementSibling.innerText = `${numberOfLikes} likes`;
+    }))
 }
