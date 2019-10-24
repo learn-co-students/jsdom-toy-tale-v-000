@@ -16,3 +16,16 @@ addBtn.addEventListener('click', () => {
 
 
 // OR HERE!
+//div -- toy collection
+//create a toy collection with class card and then add it to toy collection div
+
+
+function toyCard(){
+fetch("http://localhost:3000/toys")
+.then(resp => resp.json())
+//make a div class card and add it to toy collectino div
+.then(result =>
+var divElement = document.createElement("div")
+divElement.setAttribute("class", "card" );
+// add it to toy collection div
+)}
