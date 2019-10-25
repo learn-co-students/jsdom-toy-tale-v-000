@@ -20,12 +20,30 @@ addBtn.addEventListener('click', () => {
 //create a toy collection with class card and then add it to toy collection div
 
 
+
+function getToys(){
+  return fetch("http://localhost:3000/toys")
+  .then(resp => resp.json());
+}
+
 function toyCard(){
-fetch("http://localhost:3000/toys")
-.then(resp => resp.json())
-//make a div class card and add it to toy collectino div
-.then(result =>
-var divElement = document.createElement("div")
-divElement.setAttribute("class", "card" );
+  var divElement = document.createElement("div")
+  divElement.setAttribute("class", "card" );
+
+
+}
+
+// //make a div class card and add it to toy collectino div
+// .then(result =>
+// // var divElement = document.createElement("div")
+// // divElement.setAttribute("class", "card" );
+//
+// var element = document.getElementById("div");
+//  element.classList.add("card");
+//  var textnode = document.createTextNode(result.name)
+//  element.appendChild(textnode)
+
 // add it to toy collection div
-)}
+// )}
+
+//add the toy info into the toyCard
