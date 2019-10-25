@@ -32,22 +32,14 @@ function getToys(){
 }
 
 function toyCard(element){
-  var divElement = document.createElement("div")
-  divElement.setAttribute("class", "card" );
-  console.log(getToys.name);
+  var newElement = document.createElement('div');
+  var listToys = document.getElementById('toy-collection')
+  newElement.className = "card";
+  newElement.innerHTML = getToys()
+  listToys.appendChild(newElement)
+
+  //h2 with toys name
+  // img tag  with src of toys image attribtues
+  //p tag with how many likes that toy has
+  //button tag with a class like btn
 }
-
-// //make a div class card and add it to toy collectino div
-// .then(result =>
-// // var divElement = document.createElement("div")
-// // divElement.setAttribute("class", "card" );
-//
-// var element = document.getElementById("div");
-//  element.classList.add("card");
-//  var textnode = document.createTextNode(result.name)
-//  element.appendChild(textnode)
-
-// add it to toy collection div
-// )}
-
-//add the toy info into the toyCard
