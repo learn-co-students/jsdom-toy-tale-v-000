@@ -23,14 +23,18 @@ addBtn.addEventListener('click', () => {
 
 function getToys(){
   return fetch("http://localhost:3000/toys")
-  .then(resp => resp.json());
+  .then(resp => resp.json())
+  .then(elements => {
+  elements.forEach(element => toyCard(element))
+
+  //creating a toycard for each element.
+  })
 }
 
-function toyCard(){
+function toyCard(element){
   var divElement = document.createElement("div")
   divElement.setAttribute("class", "card" );
-
-
+  console.log(getToys.name);
 }
 
 // //make a div class card and add it to toy collectino div
