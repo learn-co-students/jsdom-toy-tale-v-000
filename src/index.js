@@ -35,7 +35,6 @@ function toyCard(element){
   var newElement = document.createElement('div');
   newElement.className = "card";
 
-  // newElement.innerHTML = element.name
 
   var h = document.createElement('h2')
   h.innerHTML = element.name
@@ -55,23 +54,6 @@ function toyCard(element){
   function likesCounter(){
 
   }
-  // var htext = document.getElementById('h2')
-  // h.innerHTML = element.name
-  // newElement.appendChild(h)
-
-
-  // var htext = document.createTextNode(element.name)
-  // new element - cardhtml.
-  //h2 - inner
-  //create each element.
-  // add event listener
-  // create individually append everything into newEelement
-
-
-  //h2 with toys name
-  // img tag  with src of toys image attribtues
-  //p tag with how many likes that toy has
-  //button tag with a class like btn
 }
 
 //send post request to save the data of a new toy
