@@ -70,8 +70,10 @@ function submitData(name,image,likes){
        "Content-Type": "application/json",
        "Accept": "application/json"
      },
-     body: {
-
-     }
+     body: JSON.stringify({
+       name:
+       image:
+       likes:
+     })
      })
 }
