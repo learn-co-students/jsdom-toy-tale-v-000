@@ -57,11 +57,11 @@ function toyCard(element){
   function likesCounter(){
 
   }
-  submitData()
+  submitData(name,image,likes)
 }
 
 //send post request to save the data of a new toy
-function submitData(){
+function submitData(name,image,likes){
   //when they click on the new button
   var newToy = document.querySelector('add-toy-form')
   return fetch("http://localhost:3000/toys", {
