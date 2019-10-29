@@ -38,11 +38,14 @@ function toyCard(element){
 
   var h = document.createElement('h2')
   h.innerHTML = element.name
+  //creating h2
   var img = document.createElement('img')
   img.setAttribute('src',element.image)
   img.setAttribute('class','toy-avatar')
+  //creating img
   var p = document.createElement('p')
   p.innerHTML = `${element.likes} Likes`
+  //creating p
   var button = document.createElement('button')
   button.setAttribute('class','like-btn')
   button.innerHTML = 'Like <3'
@@ -54,9 +57,21 @@ function toyCard(element){
   function likesCounter(){
 
   }
+  submitData()
 }
 
 //send post request to save the data of a new toy
 function submitData(){
-  return fetch('http://localhost:3000/toys')
+  //when they click on the new button
+  var newToy = document.querySelector('add-toy-form')
+  return fetch("http://localhost:3000/toys", {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+       "Accept": "application/json"
+     },
+     body: {
+
+     }
+     })
 }
