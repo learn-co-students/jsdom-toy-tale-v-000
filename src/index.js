@@ -23,6 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
   fetch("http://localhost:3000/toys")
   .then(resp => resp.json())
   .then(elements => {
+    console.log(elements)
   elements.forEach(element => toyCard(element))
   //creating a toycard for each element.
   })
@@ -30,13 +31,34 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 function toyCard(element){
-
+  var listToys = document.getElementById('toy-collection')
   var newElement = document.createElement('div');
   newElement.className = "card";
-  // var listToys = document.getElementById('toy-collection')
-  newElement.innerHTML = element.name
-  listToys.appendChild(newElement)
+
+  // newElement.innerHTML = element.name
+
   var h = document.createElement('h2')
+  h.innerHTML = element.name
+  var img = document.createElement('img')
+  img.setAttribute('src',element.image)
+  img.setAttribute('class','toy-avatar')
+  var p = document.createElement('p')
+  p.innerHTML = `${element.likes} Likes`
+  var button = document.createElement('button')
+  button.setAttribute('class','like-btn')
+  button.innerHTML = 'Like <3'
+  button.addEventListener('click', event => {likesCounter(event)})
+  //when you click the button, this will set the fucntion to start
+  newElement.append(h,img,p,button)
+  listToys.appendChild(newElement)
+
+  function likesCounter(){
+
+  }
+  // var htext = document.getElementById('h2')
+  // h.innerHTML = element.name
+  // newElement.appendChild(h)
+
 
   // var htext = document.createTextNode(element.name)
   // new element - cardhtml.
