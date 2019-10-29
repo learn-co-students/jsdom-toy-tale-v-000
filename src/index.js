@@ -54,26 +54,36 @@ function toyCard(element){
   newElement.append(h,img,p,button)
   listToys.appendChild(newElement)
 
+    var newToyForm = document.querySelector('.add-toy-form')
+    console.log('new toy form', newToyForm)
+    newToyForm.addEventListener('submit',event=>{ event.preventDefault()
+
+      var input_name = document.querySelector('#name_input')
+      //select the value
+      //submit data using thse values
+      console.log(input.value)
+      console.log('new toy form submit', this.childNodes)})
+      //subtmit data function gets invokmed
   function likesCounter(){
 
   }
-  submitData(name,image,likes)
 }
 
 //send post request to save the data of a new toy
 function submitData(name,image,likes){
   //when they click on the new button
-  var newToy = document.querySelector('add-toy-form')
-  return fetch("http://localhost:3000/toys", {
-     method: "POST",
-     headers: {
-       "Content-Type": "application/json",
-       "Accept": "application/json"
-     },
-     body: JSON.stringify({
-       name:
-       image:
-       likes:
-     })
-     })
+
+
+  // return fetch("http://localhost:3000/toys", {
+  //    method: "POST",
+  //    headers: {
+  //      "Content-Type": "application/json",
+  //      "Accept": "application/json"
+  //    },
+  //    body: JSON.stringify({
+  //      name: element.name
+  //      image: element.image
+  //      likes: element.likes
+  //    })
+  //    })
 }
