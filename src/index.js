@@ -75,5 +75,28 @@ function newToy(name, image, likes = 0) {
 
 function increaseLikes(e) {
   let addedLike = document.getElementById(event.target.id)
+  let integer = parseInt(addedLike.nextSibling.innerText[0])
+  let updatedNumber = int + 1
+  event.preventDefault()
+
+  fetch(`http://localhost:3000/toys/${integer}`, {
+    method: 'PATCH'
+    headers: 
+    {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    }
+ 
+    body: JSON.stringify({
+      "likes": updatedNumber
+    })
+  })
+  .then(response => response.json())
+  .then((json) => {addedLike.nextSibling.innerText = `${json.likes} likes`})
 }
 
+
+document.addEventListener("DomContentLoaded", function() {
+  fetchToys();
+  getNewToy();
+})
