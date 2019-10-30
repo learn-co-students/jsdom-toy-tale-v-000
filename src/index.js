@@ -54,36 +54,54 @@ function toyCard(element){
   newElement.append(h,img,p,button)
   listToys.appendChild(newElement)
 
-    var newToyForm = document.querySelector('.add-toy-form')
-    console.log('new toy form', newToyForm)
-    newToyForm.addEventListener('submit',event=>{ event.preventDefault()
+  var newToyForm = document.querySelector('.add-toy-form')
+  newToyForm.addEventListener('submit',event=>{ event.preventDefault()
 
-      var input_name = document.querySelector('#name_input')
+  var input_name = document.querySelector('#name_input')
+  var input_image = document.querySelector('#url_input')
       //select the value
       //submit data using thse values
-      console.log(input.value)
-      console.log('new toy form submit', this.childNodes)})
-      //subtmit data function gets invokmed
-  function likesCounter(){
+      //subtmit data function gets
+    submitData(input_name,input_image)
+    })
 
+  function likesCounter(){
+//conditiomal increase
+//take the old number and take that number, increase it by one. and replace it with the new number
+//set that likes number
+var current_likes = document.querySelector(//find the likes)likes.value
+fetch("http://localhost:3000/toys",{
+  method: "PATCH",
+  headers:
+  {
+  "Content-Type": "application/json",
+  Accept: "application/json"
+  } ,
+  body:
+  {
+  "likes": <new number>
+  }
+})
   }
 }
 
 //send post request to save the data of a new toy
-function submitData(name,image,likes){
+function submitData(input_name,input_image){
   //when they click on the new button
 
+  fetch("http://localhost:3000/toys", {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+       "Accept": "application/json"
+     },
+     body: JSON.stringify({
+       'name': input_name.value,
+       'image': input_image.value,
+       'likes': 0
+     })
+     })
+     .then(resp => resp.json())
+     .then(toy => toyCard(toy))
 
-  // return fetch("http://localhost:3000/toys", {
-  //    method: "POST",
-  //    headers: {
-  //      "Content-Type": "application/json",
-  //      "Accept": "application/json"
-  //    },
-  //    body: JSON.stringify({
-  //      name: element.name
-  //      image: element.image
-  //      likes: element.likes
-  //    })
-  //    })
 }
