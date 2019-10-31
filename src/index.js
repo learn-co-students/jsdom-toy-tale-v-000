@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function toyCard(element){
   var listToys = document.getElementById('toy-collection')
   var newElement = document.createElement('div');
-  newElement.className = "card";
+  newElement.className = `card-${element.id}`;
 
 
   var h = document.createElement('h2')
@@ -49,7 +49,7 @@ function toyCard(element){
   var button = document.createElement('button')
   button.setAttribute('class','like-btn')
   button.innerHTML = 'Like <3'
-  button.addEventListener('click', event => {likesCounter(event)})
+  button.addEventListener('click', event => {likesCounter(event, element.id)})
   //when you click the button, this will set the fucntion to start
   newElement.append(h,img,p,button)
   listToys.appendChild(newElement)
@@ -65,11 +65,15 @@ function toyCard(element){
     submitData(input_name,input_image)
     })
 
-  function likesCounter(){
+  function likesCounter(event,id){
 //conditiomal increase
 //take the old number and take that number, increase it by one. and replace it with the new number
 //set that likes number
-var current_likes = document.querySelector(//find the likes)likes.value
+
+var likes = document.querySelector(`.card-${id} p`)
+var current_likes = Number(likes.innerText.split(' ')[0])+1
+likes.innerHTML = `${current_likes} Likes`
+
 fetch("http://localhost:3000/toys",{
   method: "PATCH",
   headers:
@@ -79,7 +83,7 @@ fetch("http://localhost:3000/toys",{
   } ,
   body:
   {
-  "likes": <new number>
+  'likes': current_likes
   }
 })
   }
