@@ -20,10 +20,14 @@ addBtn.addEventListener('click', () => {
 //create a toy collection with class card and then add it to toy collection div
 
 window.addEventListener('DOMContentLoaded', () => {
+  //when the Dom loads -- do this
   fetch("http://localhost:3000/toys")
+  //taking the object of the toys
   .then(resp => resp.json())
+  //turning it to response of json
   .then(elements => {
     console.log(elements)
+    //taking the elements of each object
   elements.forEach(element => toyCard(element))
   //creating a toycard for each element.
   })
@@ -31,10 +35,11 @@ window.addEventListener('DOMContentLoaded', () => {
 })
 
 function toyCard(element){
+  //creating a toycard for each element
   var listToys = document.getElementById('toy-collection')
   var newElement = document.createElement('div');
   newElement.className = `card-${element.id}`;
-
+  //allowing to associate with each card, their id
 
   var h = document.createElement('h2')
   h.innerHTML = element.name
@@ -58,6 +63,7 @@ function toyCard(element){
   newToyForm.addEventListener('submit',event=>{ event.preventDefault()
 
   var input_name = document.querySelector('#name_input')
+  //query select each name input and to be able to use this for submit
   var input_image = document.querySelector('#url_input')
       //select the value
       //submit data using thse values
@@ -107,5 +113,5 @@ function submitData(input_name,input_image){
      })
      .then(resp => resp.json())
      .then(toy => toyCard(toy))
-
+     //taking the toy that they created and creating a new toy
 }
