@@ -10,7 +10,7 @@
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 8
+      "likes": 9
     },
     {
       "id": 3,
@@ -49,22 +49,10 @@
       "likes": -2
     },
     {
-      "name": "Mr. Spell",
-      "image": "https://images.app.goo.gl/m8rmVErVhqSzvh7NA",
-      "likes": 0,
+      "name": "Santa Claus",
+      "image": "https://cdn3.vectorstock.com/i/1000x1000/02/72/happy-santa-clause-cartoon-with-gift-vector-2020272.jpg",
+      "likes": 2,
       "id": 9
-    },
-    {
-      "name": "Mr. Spell",
-      "image": "https://images.app.goo.gl/m8rmVErVhqSzvh7NA",
-      "likes": 0,
-      "id": 10
-    },
-    {
-      "name": "Mr. Spell",
-      "image": "https://images.app.goo.gl/m8rmVErVhqSzvh7NA",
-      "likes": 0,
-      "id": 11
     }
   ]
 }
