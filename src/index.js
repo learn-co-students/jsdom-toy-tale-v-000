@@ -4,27 +4,26 @@ const toysUrl = "http://localhost:3000/toys";
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector('#new-toy-btn')
   const toyForm = document.querySelector('.container')
-  fetchToys();
+  fetchToys(); //fetch all the toys
 
   addBtn.addEventListener('click', () => {
      //hide & seek with the form
     addToy = !addToy //addToy = true if addBtn clicked
     if (addToy) {
-      toyForm.style.display = 'block'
+      toyForm.style.display = 'block' //Form displayed
       toyForm.addEventListener('submit', event => {
         event.preventDefault()
-        //debugger;
-        submitData(event.target)
-      })
+        submitData(event)
+      }) //Form submitted
     } else {
       toyForm.style.display = 'none'
     }
   })
-
 })
 
-function submitData(name, image) {
-  fetch("http://localhost:3000/toys",{
+//sending form data for new toy to the server
+function submitData(event) {
+  fetch(toysUrl,{
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -38,34 +37,29 @@ function submitData(name, image) {
   })
   .then(function(response) {
     return response.json()
-    //console.log(response)
   })
   .then(function(object) {
-
-    renderToy(object)
-    //toyCollection.append(added_toy)
-    //console.log(added_toy)
+    renderToy(object) //sending new tody data to the function that will display it
   })
 
 }
 
+//get all the toys from the database
 function fetchToys() {
   return fetch(toysUrl)
   .then(resp => resp.json())
   .then(json => allToys(json))
-
-  //.then(json => renderToy(json))
-  //console.log(json)
 }
 
+//iterate through the toys array and send each toy object individually to the display function
 function allToys(json) {
   json.forEach(toy => {
     renderToy(toy)
   })
 }
 
+//create a card for each toy to be displayed
  function renderToy(object){
-   //console.log(json)
   let toyCollection = document.getElementById('toy-collection')
 
   let div = document.createElement('div')
@@ -76,38 +70,31 @@ function allToys(json) {
 
   let img = document.createElement('img')
   img.src = object.image
-  img.className = 'toy-avatar'
+  img.className = 'toy-avatar'//will give it toy-avatar css styling
 
   let p = document.createElement('p')
   p.innerHTML = `${object.likes} Likes`
 
   let likeBtn = document.createElement('button')
   likeBtn.className = 'like-btn'
-  likeBtn.textContent = 'Like <3'
-  //debugger;
-  likeBtn.setAttribute('id', object.id)
-  //debugger;
+  likeBtn.innerHTML = 'Like <3'
+  likeBtn.setAttribute('id', object.id) //links button to toy id
   likeBtn.addEventListener("click", event => {
-    //debugger;
+    event.preventDefault()
     increaseLikes(event)
   })
 
-    //event.preventDefault();
-
-
-
   div.append(h2, img, p, likeBtn)
-     //div.appendChild(img)
-     //div.appendChild(p)
-  toyCollection.appendChild(div)
 
+  toyCollection.appendChild(div)
  }
 
+//add 1 to the toy's number of likes
 function increaseLikes(event) {
-  //console.log(event.target.id)
   let currentLikes = parseInt(event.target.previousElementSibling.textContent)
-  console.log(currentLikes)
+  //identify likes counters as prevousElementSibling of likeBtn (the event target)
   let newLikes = currentLikes + 1
+  //send update to database
   fetch(`http://localhost:3000/toys/${event.target.id}`,{
     method: "PATCH",
     headers: {
@@ -115,18 +102,13 @@ function increaseLikes(event) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-
       "likes": newLikes
     })
   })
   .then(function(response) {
     return response.json()
-    //console.log(response)
   })
-  .then(function(liked_object) {
+  .then(function(likes) {
     event.target.previousElementSibling.textContent = `${newLikes} likes`
-    //toyCollection.append(added_toy)
-    //console.log(added_toy)
   })
-
 }
