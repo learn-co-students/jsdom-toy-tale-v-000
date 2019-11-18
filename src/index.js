@@ -100,21 +100,24 @@ function postToys(toy) {
 
   function increaseLikes(e) {
     
-    let more = parseInt(e.target.previousElementSibling.innerText) + 1
+    let likeCount = parseInt(e.target.previousElementSibling.innerText) + 1
   
     fetch(`http://localhost:3000/toys/${e.target.id}`, {
         method: "PATCH",
         headers: {
+
           "Content-Type": "application/json",
           "Accept": "application/json"
   
         },
+
         body: JSON.stringify({
-          "likes": more
+          "likes": likeCount
+          
         })
       })
       .then(results => results.json())
-      .then(e.target.previousElementSibling.innerText = `${more} likes`)
+      .then(e.target.previousElementSibling.innerText = `${likeCount} likes`)
   }
 
 }
