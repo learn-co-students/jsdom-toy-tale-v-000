@@ -5,6 +5,22 @@ let toyCollection = document.querySelector('#toy-collection')
 
 // YOUR CODE HERE
 
+addBtn.addEventListener('click', () => {
+  // hide & seek with the form
+  addToy = !addToy
+  if (addToy) {
+    toyForm.style.display = 'block'
+    toyForm.addEventListener('submit', event => {
+      event.preventDefault()
+      postNewToys(event.target)
+    })
+  } else {
+    toyForm.style.display = 'none'
+  }
+})
+
+
+
 document.addEventListener("DOMContentLoaded", function() {
   getAllTheToys()
   //all toys are received from the database as 'toys', then each iteration is 
@@ -70,25 +86,42 @@ function postToys(toy) {
   b.setAttribute('class', 'like-btn')
   b.innerText = "Like <3"
 
+  b.addEventListener('click', (e) => {
+    console.log(e.target.dataset);
+    increaseLikes(e)
+  })
+
   let divparentcard = document.createElement('div')
   divparentcard.setAttribute('class', 'card')
   // div card is created and all newly created elements with their
   //associated attributes are appended
   divparentcard.append(h2, img, p, b)
   toyCollection.append(divparentcard)
+
+  function increaseLikes(e) {
+    
+    let more = parseInt(e.target.previousElementSibling.innerText) + 1
+  
+    fetch(`http://localhost:3000/toys/${e.target.id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+  
+        },
+        body: JSON.stringify({
+          "likes": more
+        })
+      })
+      .then(results => results.json())
+      .then(e.target.previousElementSibling.innerText = `${more} likes`)
+  }
+
 }
 
-addBtn.addEventListener('click', () => {
-  // hide & seek with the form
-  addToy = !addToy
-  if (addToy) {
-    toyForm.style.display = 'block'
-    toyForm.addEventListener('submit', event => {
-      event.preventDefault()
-      postNewToys(event.target)
-    })
-  } else {
-    toyForm.style.display = 'none'
-  }
-})
+
+
+
+
+
 // OR HERE!
