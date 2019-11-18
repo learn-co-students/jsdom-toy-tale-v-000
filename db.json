@@ -28,7 +28,7 @@
       "id": 5,
       "name": "Rex",
       "image": "http://umich.edu/~chemh215/W11HTML/SSG5/ssg5.2/FRex.png",
-      "likes": 1
+      "likes": 2
     },
     {
       "id": 6,
@@ -47,6 +47,18 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "AvoKitty",
+      "image": "https://cdn.shopify.com/s/files/1/0260/5317/products/Avocato_large.jpg?v=1559711747",
+      "likes": 0,
+      "id": 9
+    },
+    {
+      "name": "GBElmo",
+      "image": "https://stockx.imgix.net/products/streetwear/Kaws-Sesame-Street-Uniqlo-Elmo-Plush-Toy-Red.png?fit=fill&bg=FFFFFF&w=700&h=500&auto=format,compress&q=90&dpr=2&trim=color&updated_at=1542407703",
+      "likes": 0,
+      "id": 10
     }
   ]
 }
