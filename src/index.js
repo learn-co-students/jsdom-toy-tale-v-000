@@ -1,6 +1,5 @@
-let addToy = false;
-
-const addForm = document.querySelector('.add-toy-form')
+let addToy = false
+const addForm = document.querySelector('.add-toy-form');
 let toysArr;
 
 
@@ -9,9 +8,8 @@ const toysUrl = "http://localhost:3000/toys"
 
 
 function createToy(event){
-  const toyForm = document.querySelector('.container')
+  const toyForm = document.querySelector('.container');
   toyForm.style.display = "none";
-  //const toyForm = document.querySelector('.container')
   //let formName = document.getElementsByName("name")[0].value
   //let formImage = document.getElementsByName("image")[0].value
   return fetch('http://localhost:3000/toys', {
@@ -60,11 +58,39 @@ function renderToys(toysArr){
     // like button
     let likeBtn = document.createElement('button')
     likeBtn.classList.add('like-btn')
+    likeBtn.setAttribute('id', elem.id)
     likeBtn.innerHTML = "Like <3" //how can i incorporate a real heart emoji?
+    likeBtn.addEventListener('click', event => {
+      likes(event);
+    });
     cardDiv.append(likeBtn)
     toysDiv.append(cardDiv)
   });
 }
+
+
+function likes(event){
+  let numberLikes = parseInt(event.target.previousElementSibling.innerText[0]);
+  let newLikes = numberLikes + 1;
+  fetch(`http://localhost:3000/toys/${event.target.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+
+    },
+    body: JSON.stringify({
+      "likes": newLikes
+    })
+  })
+  .then(res => res.json())
+  .then((like_obj => {
+    event.target.previousElementSibling.innerText = `${newLikes} likes`;
+  }))
+}
+
+  //send this value via fetch using PATCH update to server
+  //renderToys -> do you need Object.entries?
 
 
 
