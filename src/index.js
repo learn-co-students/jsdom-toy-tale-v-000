@@ -12,14 +12,14 @@ function createToy(event){
   toyForm.style.display = "none";
   //let formName = document.getElementsByName("name")[0].value
   //let formImage = document.getElementsByName("image")[0].value
-  return fetch('http://localhost:3000/toys', {
+  return fetch(toysUrl, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      name: event.target.name.value, // how to interpolate the HTML variables form form? grab the elements above in their own global variables?
+      name: event.target.name.value,
       image: event.target.image.value,
       likes: 0,
       })
@@ -93,12 +93,8 @@ function likes(event){
   //renderToys -> do you need Object.entries?
 
 
-
-
-
   document.addEventListener("DOMContentLoaded", function (){
   fetchToys();
-  //const toyForm = document.querySelector('.container')
   const toyForm = document.querySelector('.container') //when i try and add this globally is isn't recorgnised have to declare it twice
   const addBtn = document.querySelector('#new-toy-btn')
   addBtn.addEventListener('click', () => {
