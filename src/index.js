@@ -40,9 +40,42 @@ function jsonResponsevalidation(jsonResponse){
 
 function imgExtractor(arr){
  arr.forEach(element => {
-   console.log(element.name)
+   markUp(element)
  });
 }
+
+function markUp(obj){
+  let toyCollection = document.getElementById("toy-collection");
+  
+  // -- element creation starts
+    let divCard = document.createElement("div");
+    let h2  = document.createElement("h2");
+    let img  = document.createElement("img");
+    let button  = document.createElement("button");
+    let p  = document.createElement("p");
+  
+  // -- content & attributes setting starts
+     divCard.setAttribute("class","card");
+     
+     h2.textContent = obj.name;
+     
+     img.setAttribute("src",obj.image);
+     img.setAttribute("class","toy-avatar");
+     img.textContent = obj.name;
+     
+     p.textContent = obj.likes+" Likes" ;
+     
+     button.setAttribute("class","like-btn");
+  button.textContent = "Like \u2764"
+
+  //  -- appending starts
+  toyCollection.appendChild(divCard);
+  divCard.appendChild(h2);
+  divCard.appendChild(img);
+  divCard.appendChild(p);
+  divCard.appendChild(button);
+}
+
 function logError(error){
   console.log('un error occured: \n', error);
 }
@@ -55,6 +88,6 @@ function fetchSource(resource){
   .then(responseAsJson)
   .then(jsonResponsevalidation)
   .then(imgExtractor)
-  // .catch(logError)
+  .catch(logError)
 }
 
