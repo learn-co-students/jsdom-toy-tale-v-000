@@ -1,4 +1,5 @@
 let addToy = false
+const toysUrl = "http://localhost:3000/toys"
 
 document.addEventListener("DOMContentLoaded", ()=>{
   const addBtn = document.querySelector('#new-toy-btn')
@@ -14,3 +15,91 @@ document.addEventListener("DOMContentLoaded", ()=>{
   })
 
 })
+
+// fetch all of Andy's toys
+function fetchToys() {
+  const toys = fetch(toysUrl)
+    .then(resp => resp.json())
+    .then(json => json.forEach(toy => {
+      renderToyCard(toy)
+    }));
+};
+
+// add toy info to the card
+function renderToyCard(toy) {
+  const toyCollection = document.getElementById('toy-collection');
+  const toyCard = document.createElement('div');
+  toyCard.classList.add('card');
+    toyCard.innerHTML +=
+      `
+        <h2>${toy.name}</h2>
+        <img src=${toy.image} class="toy-avatar" />
+      `
+  toyCollection.appendChild(toyCard);
+  const toyLikes = document.createElement("p");
+  toyLikes.innerText = `${toy.likes} Likes`;
+  toyCard.appendChild(toyLikes);
+  const likeBtn = document.createElement('button');
+  likeBtn.innerText = "like";
+  toyCard.appendChild(likeBtn);
+
+  likeBtn.addEventListener('click', () => {
+    increaseLikes(toy, toyLikes)
+  })
+}
+
+function submitData(name, image) {
+  let formData = {
+    name: name,
+    image: image,
+    likes: 0
+  };
+
+  let configObj = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(formData)
+  };
+
+  return fetch("http://localhost:3000/toys", configObj)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (object) {
+      renderToyCard(object)
+    })
+    .catch(function (error) {
+      let h2 = document.createElement('h2');
+      h2.innerHTML = "Bad Access";
+      document.body.appendChild(h2);
+      alert("Bad Access");
+      console.log(error.message);
+    });
+}
+
+function increaseLikes(toy, toyLikes) {
+  console.log(toy);
+
+  let likeObj = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      "likes": ++toy.likes
+    })
+  };  
+
+  return fetch(`http://localhost:3000/toys/${toy.id}`, likeObj)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (updatedToy) {
+      console.log(updatedToy);
+      toyLikes.innerText = `${updatedToy.likes} Likes`;
+    });
+}
