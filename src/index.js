@@ -4,41 +4,47 @@ document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector('#new-toy-btn')
   const toyForm = document.querySelector('.container')
 
+  getAllToyCards();
+
   addBtn.addEventListener('click', () => {
     // hide & seek with the form
     addToy = !addToy
     if (addToy) {
       toyForm.style.display = 'block'
+      
+      toyForm.addEventListener('submit', event => {
+        event.preventDefault()
+        postNewToyCard(event.target)
+      })
     } else {
       toyForm.style.display = 'none'
     }
   })
 
+})
+
+
+
+function getAllToyCards() {
   let configurationObject = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
-    },
-    // body: JSON.stringify({
-    //   name: userName,
-    //   email: userEmail
-    // })
+    }
   };
 
   return fetch('http://localhost:3000/toys', configurationObject).then(function (response) {
     return response.json();
   })
     .then(function (json) {
-      console.log(json)
-      json.forEach(object => 
+
+      json.forEach(object =>
         createToyCard(object)
-        
-        )
+
+      )
     })
-
-})
-
+}
 
 
 
@@ -64,3 +70,26 @@ function createToyCard(obj) {
   cardDiv.appendChild(button)
   allToys.appendChild(cardDiv)
 }
+
+function postNewToyCard(target) {
+  let configurationObject = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(
+      {"name": target.name.value, 
+      "image": target.image.value,
+      "likes": 0}
+    )
+  };
+
+  return fetch('http://localhost:3000/toys', configurationObject).then(function (response) {
+    return response.json();
+  })
+    .then(function (json) {
+      createToyCard(json)
+    })
+}
+
