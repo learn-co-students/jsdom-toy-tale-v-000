@@ -30,7 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
     return response.json();
   })
     .then(function (json) {
-      json.message.forEach(object => createToyCard(object))
+      console.log(json)
+      json.forEach(object => 
+        createToyCard(object)
+        
+        )
     })
 
 })
@@ -47,12 +51,12 @@ function createToyCard(obj) {
   let allToys = document.getElementById('toy-collection')
 
   cardDiv.className = "card"
-  image.src.className = "toy-avatar"
+  image.className = "toy-avatar"
   button.className = "like-btn"
   h2.textContent = obj['name']
-  image.src(obj['image'])
-  paragraph.textContent = obj['image']
-  button.textContent = obj['likes']
+  image.src = obj['image']
+  paragraph.textContent = `${obj['likes']} Likes`
+  button.textContent = "Like <3"
 
   cardDiv.appendChild(h2)
   cardDiv.appendChild(image)
