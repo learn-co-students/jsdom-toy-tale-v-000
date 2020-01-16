@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector('#new-toy-btn')
   const toyForm = document.querySelector('.container')
 
-  getAllToyCards();
+  getAllToyCards()
 
   addBtn.addEventListener('click', () => {
     // hide & seek with the form
@@ -46,8 +46,6 @@ function getAllToyCards() {
     })
 }
 
-
-
 function createToyCard(obj) {
   let cardDiv = document.createElement('div')
   let h2 = document.createElement('h2')
@@ -69,6 +67,13 @@ function createToyCard(obj) {
   cardDiv.appendChild(paragraph)
   cardDiv.appendChild(button)
   allToys.appendChild(cardDiv)
+
+  button.addEventListener('click', event => {
+    event.preventDefault()
+    console.log(event)
+    console.log(event.toElement.parentNode)
+    //this will show you which node is being liked
+  })
 }
 
 function postNewToyCard(target) {
@@ -93,3 +98,20 @@ function postNewToyCard(target) {
     })
 }
 
+
+function increaseToyCardLikes(event) {
+  
+
+  let configurationObject = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(
+      {
+        "likes": target.likes + 1
+      }
+    )
+  }
+}
