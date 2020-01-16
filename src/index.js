@@ -1,4 +1,6 @@
 let addToy = false
+const resource = "http://localhost:3000/toys"
+
 
 document.addEventListener("DOMContentLoaded", ()=>{
   const addBtn = document.querySelector('#new-toy-btn')
@@ -12,82 +14,158 @@ document.addEventListener("DOMContentLoaded", ()=>{
       toyForm.style.display = 'none'
     }
   })
-  fetchSource(resource)
+  
 })
+  
+fetchSource(resource).then(submitObj).then(likeAction).catch(logError)
 
 
-// ----
-const resource = "http://localhost:3000/toys"
+// ---- [Start] fetch & display elements 
 
-function validateResponse(response){
-  if(!response.ok){
-    throw Error (response.statusText);
+  function validateResponse(response){
+    if(!response.ok){
+      throw Error (response.statusText);
+    }
+    return response
   }
-  return response
-}
 
-function responseAsJson(response){
-  return response.json();
-}
-
-function jsonResponsevalidation(jsonResponse){
-  
-  if (!Array.isArray(jsonResponse)){
-    throw Error("The respose Object is that an Array");
+  function responseAsJson(response){
+    return response.json();
   }
-  return jsonResponse
-}
 
-function imgExtractor(arr){
- arr.forEach(element => {
-   markUp(element)
- });
-}
+  function jsonResponsevalidation(jsonResponse){
+    
+    if (!Array.isArray(jsonResponse)){
+      throw Error("The respose Object is that an Array");
+    }
+    return jsonResponse
+  }
 
-function markUp(obj){
-  let toyCollection = document.getElementById("toy-collection");
+  function imgExtractor(arr){
+  arr.forEach(element => {
+    if (element.likes === undefined){ element.likes = 0;}
+    markUp(element)
+  });
+  }
+
+  function markUp(obj){
+    let toyCollection = document.getElementById("toy-collection");
+    
+    // -- element creation starts
+      let divCard = document.createElement("div");
+      let h2  = document.createElement("h2");
+      let img  = document.createElement("img");
+      let button  = document.createElement("button");
+      let p  = document.createElement("p");
+    
+    // -- content & attributes setting starts
+    divCard.setAttribute("class","card");
+    divCard.setAttribute("id", obj.id);
+    
+      h2.textContent = obj.name;
+      img.setAttribute("src",obj.image);
+      img.setAttribute("class","toy-avatar");
+      img.textContent = obj.name;
+      p.textContent = obj.likes + " Likes";
+      button.setAttribute("class","like-btn");
+    button.textContent = "Like \u2764"
+
+    //  -- appending starts
+    toyCollection.appendChild(divCard);
+    divCard.appendChild(h2);
+    divCard.appendChild(img);
+    divCard.appendChild(p);
+    divCard.appendChild(button);
+  }
+
+  function logError(error){
+    console.log('un error occured: \n', error);
+  }
+
+  // ---- [END] fetch & display elements
+
+  // ---- [START] form evenListener
+
+ function formData(event, form){
+      if(event.type === "click"){
+        let formData = {
+        "name" : form[0].value,
+        "image" : form[1].value,
+        "likes" : 0
+        }
+        configHeader(formData)
+      }
+    }
+
+
+function configHeader(formData) {
+   let obj = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: JSON.stringify(formData)
+  }
   
-  // -- element creation starts
-    let divCard = document.createElement("div");
-    let h2  = document.createElement("h2");
-    let img  = document.createElement("img");
-    let button  = document.createElement("button");
-    let p  = document.createElement("p");
-  
-  // -- content & attributes setting starts
-     divCard.setAttribute("class","card");
-     
-     h2.textContent = obj.name;
-     
-     img.setAttribute("src",obj.image);
-     img.setAttribute("class","toy-avatar");
-     img.textContent = obj.name;
-     
-     p.textContent = obj.likes+" Likes" ;
-     
-     button.setAttribute("class","like-btn");
-  button.textContent = "Like \u2764"
-
-  //  -- appending starts
-  toyCollection.appendChild(divCard);
-  divCard.appendChild(h2);
-  divCard.appendChild(img);
-  divCard.appendChild(p);
-  divCard.appendChild(button);
+  fetch(resource, obj).then((resp) => resp.json())
+    .then((data) => { console.log('Success:', data); })
+    .catch((error) => { console.error('Error:', error); })
 }
 
-function logError(error){
-  console.log('un error occured: \n', error);
+
+function submitObj() {
+  let submitButton = document.querySelector(".add-toy-form \.submit")
+  let form = document.querySelector(".add-toy-form")
+  submitButton.addEventListener("click", (event) => { formData(event, form) })
 }
+
+// ---- [END] form evenListener
+
+
+// ---- [START] likes evenListener
+function likeAction() {
+  let btn = document.querySelectorAll('button.like-btn');
+  btn.forEach((node) => { 
+    node.addEventListener("click", (element) => { plusOne(element) })})
+
+  // plusOne(element)
+
+  function plusOne(element) {
+    let newValue = parseInt(element.target.previousElementSibling.innerText) + 1
+    let targetId = element.target.parentNode.id 
+    let configHeader = {
+      method: 'PATCH',
+      headers:{
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        "likes": newValue
+          })
+    }
+    fetch(`http://localhost:3000/toys/${targetId}`, configHeader)
+    .then((response) => { return response.json() })
+    .then((response) => { console.log(response)})
+    }
+
+}
+
+
+
+
+// ---- [END] likes evenListener
 
 
 // -- initializes img req.
-function fetchSource(resource){
-  fetch(resource)
-  .then(validateResponse)
-  .then(responseAsJson)
-  .then(jsonResponsevalidation)
-  .then(imgExtractor)
-  .catch(logError)
+async function fetchSource(resource){
+  await  fetch(resource)
+    .then(validateResponse)
+    .then(responseAsJson)
+    .then(jsonResponsevalidation)
+    .then(imgExtractor)
+    .catch(logError)
 }
+
+
 
