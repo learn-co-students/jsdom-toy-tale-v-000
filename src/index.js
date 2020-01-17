@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", ()=>{
   
 })
   
-fetchSource(resource).then(submitObj).then(likeAction).catch(logError)
+fetchSource(resource).then(submitObj).then(likeAction).catch((error) => { console.error('Error:', error); })
 
 
 // ---- [Start] fetch & display elements 
@@ -36,7 +36,7 @@ fetchSource(resource).then(submitObj).then(likeAction).catch(logError)
   function jsonResponsevalidation(jsonResponse){
     
     if (!Array.isArray(jsonResponse)){
-      throw Error("The respose Object is that an Array");
+      throw Error("The respose Object is that of an Array");
     }
     return jsonResponse
   }
@@ -78,9 +78,6 @@ fetchSource(resource).then(submitObj).then(likeAction).catch(logError)
     divCard.appendChild(button);
   }
 
-  function logError(error){
-    console.log('un error occured: \n', error);
-  }
 
   // ---- [END] fetch & display elements
 
@@ -93,14 +90,14 @@ fetchSource(resource).then(submitObj).then(likeAction).catch(logError)
         "image" : form[1].value,
         "likes" : 0
         }
-        configHeader(formData)
+        configHeader('POST',formData, resource)
       }
     }
 
 
-function configHeader(formData) {
+function configHeader(method,formData, resource) {
    let obj = {
-    method: 'POST',
+    method: method,
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
@@ -127,32 +124,14 @@ function submitObj() {
 function likeAction() {
   let btn = document.querySelectorAll('button.like-btn');
   btn.forEach((node) => { 
-    node.addEventListener("click", (element) => { plusOne(element) })})
-
-  // plusOne(element)
-
-  function plusOne(element) {
+  node.addEventListener("click", (element) => { plusOne(element) })})
+  
+    function plusOne(element) {
     let newValue = parseInt(element.target.previousElementSibling.innerText) + 1
     let targetId = element.target.parentNode.id 
-    let configHeader = {
-      method: 'PATCH',
-      headers:{
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        "likes": newValue
-          })
+    configHeader('PATCH', { "likes": newValue }, `http://localhost:3000/toys/${targetId}`)
     }
-    fetch(`http://localhost:3000/toys/${targetId}`, configHeader)
-    .then((response) => { return response.json() })
-    .then((response) => { console.log(response)})
-    }
-
 }
-
-
-
 
 // ---- [END] likes evenListener
 
@@ -164,7 +143,7 @@ async function fetchSource(resource){
     .then(responseAsJson)
     .then(jsonResponsevalidation)
     .then(imgExtractor)
-    .catch(logError)
+    .catch((error) => { console.error('Error:', error); })
 }
 
 
