@@ -71,7 +71,7 @@ function createToyCard(obj) {
   button.addEventListener('click', event => {
     event.preventDefault()
     const toyNodeChildren = event.toElement.parentNode.children
-    findToyInDb(toyNodeChildren[0].textContent, toyNodeChildren[1].src)
+    findToyInDb(toyNodeChildren[0].textContent, toyNodeChildren[1].src, event)
     
   })
 }
@@ -99,7 +99,7 @@ function postNewToyCard(target) {
 }
 
 
-function findToyInDb(name, image) {
+function findToyInDb(name, image, event) {
 
   let configurationObject = {
     method: "GET",
@@ -117,14 +117,13 @@ function findToyInDb(name, image) {
         
         return obj.name === name && obj.image === image
       })
-      increaseToyCardLikes(toyCard[0])
+      increaseToyCardLikes(toyCard[0], event)
       
     })
 
 }
 
-function increaseToyCardLikes(jsonObject) {
-  console.log(jsonObject)
+function increaseToyCardLikes(jsonObject, event) {
 
   let configurationObject = {
     method: "PATCH",
@@ -138,9 +137,11 @@ function increaseToyCardLikes(jsonObject) {
       }
     )
   }
-  console.log(configurationObject)
+
   return fetch(`http://localhost:3000/toys/${jsonObject.id}`, configurationObject).then((response) => response.json())
     .then((data) => {
-      console.log('Success:', data);
+      console.log('Success:', data)
+      event.target.previousElementSibling.innerHTML = `${data.likes} Likes`
+
     })
 }
