@@ -70,9 +70,9 @@ function createToyCard(obj) {
 
   button.addEventListener('click', event => {
     event.preventDefault()
-    console.log(event)
-    console.log(event.toElement.parentNode)
-    //this will show you which node is being liked
+    const toyNodeChildren = event.toElement.parentNode.children
+    findToyInDb(toyNodeChildren[0].textContent, toyNodeChildren[1].src)
+    
   })
 }
 
@@ -99,8 +99,32 @@ function postNewToyCard(target) {
 }
 
 
-function increaseToyCardLikes(event) {
-  
+function findToyInDb(name, image) {
+
+  let configurationObject = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  };
+
+  return fetch('http://localhost:3000/toys', configurationObject).then(function (response) {
+    return response.json();
+  })
+    .then(function (json) {
+      const toyCard = json.filter(function(obj) {
+        
+        return obj.name === name && obj.image === image
+      })
+      increaseToyCardLikes(toyCard[0])
+      
+    })
+
+}
+
+function increaseToyCardLikes(jsonObject) {
+  console.log(jsonObject)
 
   let configurationObject = {
     method: "PATCH",
@@ -110,8 +134,13 @@ function increaseToyCardLikes(event) {
     },
     body: JSON.stringify(
       {
-        "likes": target.likes + 1
+        "likes": jsonObject.likes + 1
       }
     )
   }
+  console.log(configurationObject)
+  return fetch(`http://localhost:3000/toys/${jsonObject.id}`, configurationObject).then((response) => response.json())
+    .then((data) => {
+      console.log('Success:', data);
+    })
 }
