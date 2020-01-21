@@ -14,3 +14,23 @@ document.addEventListener("DOMContentLoaded", ()=>{
   })
 
 })
+function getAllToyCards() {
+  let configurationObject = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  };
+
+  return fetch('http://localhost:3000/toys', configurationObject).then(function (response) {
+    return response.json();
+  })
+    .then(function (json) {
+
+      json.forEach(object =>
+        createToyCard(object)
+
+      )
+    })
+}
