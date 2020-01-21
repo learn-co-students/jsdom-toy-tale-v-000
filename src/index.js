@@ -1,19 +1,9 @@
+const addBtn = document.querySelector('#new-toy-btn')
+const toyForm = document.querySelector('.container')
 let addToy = false
+let divCollect = document.querySelector('#toy-collection')
 
-document.addEventListener("DOMContentLoaded", ()=>{
-  const addBtn = document.querySelector('#new-toy-btn')
-  const toyForm = document.querySelector('.container')
-  addBtn.addEventListener('click', () => {
-    // hide & seek with the form
-    addToy = !addToy
-    if (addToy) {
-      toyForm.style.display = 'block'
-    } else {
-      toyForm.style.display = 'none'
-    }
-  })
 
-})
 function getToys() {
   return fetch('http://localhost:3000/toys')
     .then(res => res.json())
