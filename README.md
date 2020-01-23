@@ -1,5 +1,8 @@
 # Toy Tale
 
+<p>Here is an illustration of this workspace by Richard Burd:</p>
+<img src="https://i.imgur.com/A8iUgCk.jpg" title="source: imgur.com" />
+
 You've got a friend in need! Your friend Andy recently misplaced all their toys!
 Help Andy recover their toys and get the toys back in the toy collection.
 
@@ -10,7 +13,7 @@ data using a JSON server. In order to do this, run the following two commands:
 
    * `npm install -g json-server`
    * `json-server --watch db.json`
-   
+
 This will create a server storing all of our lost toy data with restful routes
 at `http://localhost:3000/toys`. You can also check out
 `http://localhost:3000/toys/:id`
@@ -51,7 +54,7 @@ After all of that, the toy card should resemble:
 
 ```
 POST http://localhost:3000/toys
-headers: 
+headers:
 {
   "Content-Type": "application/json",
   Accept: "application/json"
@@ -73,10 +76,10 @@ When a user clicks on a toy's like button, two things should happen:
   * Conditional increase to the toy's like count
   * A patch request sent to the server at `http://localhost:3000/toys/:id` updating the number of likes that the specific toy has
   * Headers and body are provided below (If your request isn't working, make sure your header and keys match the documentation.)
-  
+
 ```
 PATCH http://localhost:3000/toys/:id
-headers: 
+headers:
 {
   "Content-Type": "application/json",
   Accept: "application/json"
