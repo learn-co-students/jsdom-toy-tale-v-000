@@ -9,6 +9,10 @@ function formSetup(){
     addToy = !addToy;
     if (addToy) {
       toyForm.style.display = "block";
+      toyForm.addEventListener('submit', e => {
+        e.preventDefault();
+        postToy(e.target);
+      });
     } else {
       toyForm.style.display = "none";
     }
@@ -73,9 +77,35 @@ function createToyCard(toy){
   return toyCard;
 }
 
+function postToy(toyData){
+  let toyCollection = document.getElementById('toy-collection');
+  const url = "http://localhost:3000/toys"
+
+  let body = {
+    "name": toyData.name.value,
+    "image": toyData.image.value,
+    "likes": 0
+  }
+
+  const cobject = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(body)
+  }
+
+  fetch(url, cobject)
+  .then(r => r.json())
+  .then(toy => {
+    let toyCard = createToyCard(toy);
+    toyCollection.appendChild(toyCard);
+  })
+}
+
 function listToys(json){
   const toyCollection = document.getElementById('toy-collection');
-  
   for(const toy of json){
     let toyCard = createToyCard(toy);
     toyCollection.appendChild(toyCard);
