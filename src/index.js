@@ -23,11 +23,14 @@ function formSetup(){
 
 function createToyCard(toy){
   let toyCard = document.createElement('div');
+  let toyId = document.createElement('span');
   let toyName = document.createElement('h2');
   let toyImg = document.createElement('img');
   let toyLikes = document.createElement('p');
   let likeButton = document.createElement('button');
 
+  toyId.innerText = toy.id;
+  toyId.style.display = 'none';
   toyCard.classList.add('card');
   toyName.innerText = toy.name;
   toyImg.classList.add('toy-avatar');
@@ -36,7 +39,7 @@ function createToyCard(toy){
   likeButton.classList.add('like-btn');
   likeButton.innerHTML = 'Like &hearts;';
 
-  const children = [toyName, toyImg, toyLikes, likeButton];
+  const children = [toyId, toyName, toyImg, toyLikes, likeButton];
 
   for(child of children){
     toyCard.appendChild(child);
