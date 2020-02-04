@@ -1,12 +1,6 @@
 let addToy = false;
 let toysEndpoint = "http://localhost:3000/toys"
 
-function executeGet(f, url){
-  fetch(url)
-  .then(r => r.json())
-  .then(json => f(json))
-}
-
 function formSetup(){
   const addBtn = document.querySelector("#new-toy-btn");
   const toyForm = document.querySelector(".container");
@@ -21,16 +15,43 @@ function formSetup(){
   });
 }
 
+function executeGet(f, url){
+  fetch(url)
+  .then(r => r.json())
+  .then(json => f(json))
+}
+
+function likes(e){
+  e.preventDefault();
+  let numLikes = parseInt(e.target.previousElementSibling.innerText) + 1;
+  let url = `http://localhost:3000/toys/${e.target.id}`;
+  let body = {
+    "likes": numLikes
+  }
+
+  const cobject = {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify(body)
+  }
+
+  fetch(url, cobject)
+  .then(r => r.json())
+  .then(o => {
+    e.target.previousElementSibling.innerText = `${numLikes} likes`;
+  });
+}
+
 function createToyCard(toy){
   let toyCard = document.createElement('div');
-  let toyId = document.createElement('span');
   let toyName = document.createElement('h2');
   let toyImg = document.createElement('img');
   let toyLikes = document.createElement('p');
   let likeButton = document.createElement('button');
 
-  toyId.innerText = toy.id;
-  toyId.style.display = 'none';
   toyCard.classList.add('card');
   toyName.innerText = toy.name;
   toyImg.classList.add('toy-avatar');
@@ -38,8 +59,12 @@ function createToyCard(toy){
   toyLikes.innerText = `${toy.likes} Likes`;
   likeButton.classList.add('like-btn');
   likeButton.innerHTML = 'Like &hearts;';
+  likeButton.setAttribute('id', toy.id);
+  likeButton.addEventListener('click', (e) => {
+    likes(e);
+  });
 
-  const children = [toyId, toyName, toyImg, toyLikes, likeButton];
+  const children = [toyName, toyImg, toyLikes, likeButton];
 
   for(child of children){
     toyCard.appendChild(child);
