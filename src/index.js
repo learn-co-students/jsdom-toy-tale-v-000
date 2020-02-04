@@ -70,7 +70,7 @@ function createToyCard(toy){
 
   const children = [toyName, toyImg, toyLikes, likeButton];
 
-  for(child of children){
+  for(const child of children){
     toyCard.appendChild(child);
   }
 
