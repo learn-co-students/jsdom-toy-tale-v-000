@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const toyCollection = document.querySelector('#toy-collection')
     const addBtn = document.querySelector('#new-toy-btn')
     const toyForm = document.querySelector('.container')
+    const toyFormSubmit = document.querySelector('.submit')
+
 
     function fetchToys() {
         fetch('http://localhost:3000/toys')
@@ -37,29 +39,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }
 
-    addBtn.addEventListener('click', newToy);
+    // left off here, eventlistener not working
 
-    function newToy(toy) {
+    addBtn.addEventListener('click', showForm());
+
+    function showForm() {
+        document.querySelector(".add-toy-form").style.display = "block";
+    }
+
+    toyFormSubmit.addEventListener('click', newToy());
+
+
+    function newToy(input) {
         //display the toy form, on submit take the input, set the values, run addToy
 
-        fetch('http://localhost:3000/toys', {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": 'application/json'
-            },
-            body: JSON.stringify({
-                    "name": toy.name.value,
-                    "image": toy.image.value,
-                    "likes": 0
-                })
-                .then(function(response) {
-                    return response.json();
-                })
-                .then((obj_toy) => {
-                    let new_toy = addCard(obj_toy)
-                })
-        });
+
+        // fetch('http://localhost:3000/toys', {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         "Accept": 'application/json'
+        //     },
+        //     body: JSON.stringify({
+        //             "name": toy.name.value,
+        //             "image": toy.image.value,
+        //             "likes": 0
+        //         })
+        //         .then(function(response) {
+        //             return response.json();
+        //         })
+        //         .then((obj_toy) => {
+        //             let new_toy = addCard(obj_toy)
+        //         })
+        // });
     }
 
     //Increase toys likes
