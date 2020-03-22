@@ -81,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
       toyObject.name = nameInput
       toyObject.image = imageInput
       createToy(toyObject)
+      document.getElementById('toy-collection').innerHTML = ''
       getToys()
     })
   }
@@ -117,6 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         'likes': toy.likes
       })
     })
+    .catch(error => console.log('error on patch'))
   }
 
   const deleteToy = (toy) => {

@@ -16,13 +16,13 @@
       "id": 3,
       "name": "Mr. Potato Head",
       "image": "https://vignette.wikia.nocookie.net/universe-of-smash-bros-lawl/images/d/d8/Mr-potato-head-toy-story.gif/revision/latest?cb=20151129131217",
-      "likes": 3
+      "likes": 14
     },
     {
       "id": 4,
       "name": "Slinky Dog",
       "image": "https://www.freeiconspng.com/uploads/slinky-png-transparent-1.png",
-      "likes": 5
+      "likes": 6
     },
     {
       "id": 5,
@@ -61,16 +61,22 @@
       "id": 21
     },
     {
-      "likes": 0,
+      "likes": 2,
       "name": "Forky",
       "image": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Forky_waving.png/220px-Forky_waving.png",
       "id": 22
     },
     {
-      "likes": 0,
+      "likes": 11,
       "name": "Duke Caboom",
       "image": "https://lumiere-a.akamaihd.net/v1/images/duke-caboom-1200x285_9fa6e10e.jpeg?region=607,0,285,285",
       "id": 23
+    },
+    {
+      "likes": 3,
+      "name": "Gabby Gabby",
+      "image": "https://static3.cbrimages.com/wordpress/wp-content/uploads/2019/06/Gabby-Gabby-Toy-Story-4-Header.jpg",
+      "id": 24
     }
   ]
 }
