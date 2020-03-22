@@ -22,7 +22,7 @@
       "id": 4,
       "name": "Slinky Dog",
       "image": "https://www.freeiconspng.com/uploads/slinky-png-transparent-1.png",
-      "likes": 6
+      "likes": 8
     },
     {
       "id": 5,
@@ -77,6 +77,12 @@
       "name": "Gabby Gabby",
       "image": "https://static3.cbrimages.com/wordpress/wp-content/uploads/2019/06/Gabby-Gabby-Toy-Story-4-Header.jpg",
       "id": 24
+    },
+    {
+      "likes": 42,
+      "name": "Blake",
+      "image": "things",
+      "id": 25
     }
   ]
 }

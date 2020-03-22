@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
       toyForm.style.display = "none";
     }
   });
+  
   getToys()
   formListener()
   
@@ -27,8 +28,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
     })
     .catch(error => {
-      alert("Ran into some kind of error here.")
-      console.log('errors are here bro', error.message)
+      alert("Error during getToys()")
     })
   }
   
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
       body: JSON.stringify(toy)
     } )
     .catch(error => {
-      alert("Error Here")
+      alert("Error on createToy()")
     })
   }
   
@@ -83,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
       createToy(toyObject)
       document.getElementById('toy-collection').innerHTML = ''
       getToys()
+
+      event.target.reset()
     })
   }
   
