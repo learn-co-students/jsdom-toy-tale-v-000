@@ -58,7 +58,7 @@ function toyInfo(){
   // create Toy Elements
   const card = document.createElement("div")
   const h2 = document.createElement("h2")
-  const img = document.createElement("img")
+  const img = document.createElement("img").src
   const p = document.createElement("p")
   const button = document.createElement("btn")
   // h2 tag with the toy's name
