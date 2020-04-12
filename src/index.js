@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function fetchAllToys() {
   const allToysListUrl = 'http://localhost:3000/toys'
-  //on page load, fetch all the dog breeds using the url above 
+  //on page load, fetch all the toys using the url above 
   fetch(allToysListUrl)
   .then(resp => resp.json())
       .then(json => renderToys(json))
@@ -62,8 +62,8 @@ function toyInfo(){
   const p = document.createElement("p")
   const button = document.createElement("btn")
   // h2 tag with the toy's name
-  let toysName = h2
-  card.appendChild(toysName)
+  let toyName = h2
+  card.appendChild(toyName)
   // img tag with the src of the toy's image attribute and the class name "toy-avatar"
   let toyImage = img 
   card.appendChild(toyImage)
@@ -99,7 +99,7 @@ function renderToys(json) {
 //     fetch(toysUrl)
 //       .then(resp => resp.json())
 //       .then(json => {
-        toyCollection = document.getElementById("toy-collection")
+        // toyCollection = document.getElementById("toy-collection")
   
   // Add class name to the div
   // card.className = "card"
@@ -132,3 +132,21 @@ function addButton() {
   // Add class name to the button
   button.className = "like=btn"
 }
+
+function addNewToy(toyInfo) {
+  //  a POST request is sent to http://localhost:3000/toys
+  fetch("http://localhost:3000/toys", {
+    method: "POST", 
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    }
+  })
+
+ 
+  body: JSON.stringify({
+    "name": toyInfo.name.value,        //"Jessie",
+    "image": toyInfo.image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+    "likes": toyInfo.tooyLikes.value    //0
+  })  
+} 
