@@ -72,7 +72,7 @@ function toyInfo(){
   card.appendChild(toyLikes)
   // button tag with a class "like-btn"
   let likeButton = button
-  card.appendChaild(likeButton)
+  card.appendChild(likeButton)
 
   document.querySelector("toy-collection")
   // Set to updateToyList
