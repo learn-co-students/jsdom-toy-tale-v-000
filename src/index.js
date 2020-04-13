@@ -147,6 +147,6 @@ function addNewToy(toyInfo) {
   body: JSON.stringify({
     "name": toyInfo.name.value,        //"Jessie",
     "image": toyInfo.image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-    "likes": toyInfo.tooyLikes.value    //0
+    "likes": toyInfo.toyLikes.value    //0
   })  
 } 
