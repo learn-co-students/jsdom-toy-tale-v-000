@@ -54,32 +54,6 @@ function fetchAllToys() {
     
 // }
 
-function toyInfo(){
-  // create Toy Elements
-  const card = document.createElement("div")
-  const h2 = document.createElement("h2")
-  const img = document.createElement("img").src
-  const p = document.createElement("p")
-  const button = document.createElement("btn")
-  // h2 tag with the toy's name
-  let toyName = h2
-  card.appendChild(toyName)
-  // img tag with the src of the toy's image attribute and the class name "toy-avatar"
-  let toyImage = img 
-  card.appendChild(toyImage)
-  // p tag with how many likes that toy has
-  let toyLikes = p
-  card.appendChild(toyLikes)
-  // button tag with a class "like-btn"
-  let likeButton = button
-  card.appendChild(likeButton)
-
-  document.querySelector("toy-collection")
-  // Set to updateToyList
-  updateToyList = document.querySelector("toy-collection")
-
-}
-
 
 function renderToys(json) {
   // debugger //HIT
@@ -88,11 +62,14 @@ function renderToys(json) {
   originalToyList = Object.keys(json) //Original Toy List
   // debugger //HIT 
     // iterate over array
-    for (let i = 0; i < originalToyList.length; i++) {
-    // debugger //HIT
-      toyCollection.innerHTML += `<li>${originalToyList[i]}</li>`
+    for (let i = 0; i < json.length; i++) {
+      toyInfo(json[i])
+    // for (let i = 0; i < originalToyList.length; i++) {
+    // debugger //HIT.
+    // toyCollection.innerHTML += `<li>${json[i].name}</li>`
+      // toyCollection.innerHTML += `<li>${originalToyList[i]}</li>`
     } 
-    // debugger //Hit
+    //  debugger //Hit
 }
 
 //   const toysUrl = "http:localhost:3000/toys"
@@ -133,7 +110,12 @@ function addButton() {
   button.className = "like=btn"
 }
 
-function addNewToy(toyInfo) {
+function addImage() {
+  // Add class name to the image
+  card.className = "toy-avatar"
+}
+
+function addNewToy(toy) {
   //  a POST request is sent to http://localhost:3000/toys
   fetch("http://localhost:3000/toys", {
     method: "POST", 
@@ -150,3 +132,64 @@ function addNewToy(toyInfo) {
     "likes": toyInfo.toyLikes.value    //0
   })  
 } 
+
+function toyInfo(toy){
+  // create Toy Elements
+  const card = document.createElement("div")
+  // h2 tag with the toy's name
+  const h2 = document.createElement("h2")
+  // const img = document.createElement("img")
+  // const img = document.createElement("img").src
+  // const img = document.createElement("toy-avatar").src
+  // img tag with the src of the toy's image attribute and the class name "toy-avatar"
+  const img = document.createElement("toy-avatar")
+  const p = document.createElement("p")
+  const button = document.createElement("like-btn")
+
+  // h2 tag with the toy's name
+    //  Displays toy name
+    toyName = toy.name
+    card.appendChild(h2).toyName
+  //  debugger //HITS
+  //  card.appendChild(h2).toyName
+  // h2.innerText=toy.name
+  // card.appendChild(toyName)
+  // card.appendChild(h2).toyName
+  // toyName = document.card.getElementById("h2")
+  // debugger //HITS
+
+  // img tag with the src of the toy's image attribute and the class name "toy-avatar"
+  toyImage = toy.image
+  card.appendChild(img).toyImage
+    // let toyImage = img.innerHTML
+  // card.appendChild(toyImage)
+  // toyImage = toy.image.href
+  // toyImage = toy.image.target
+     // card.appendChild("toy-avatar") index.js:159 Uncaught (in promise) TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.
+  // card.appendChild("img").toyImage //index.js:154 Uncaught (in promise) TypeError: Failed to execute 'appendChild' on 'Node': parameter 1 is not of type 'Node'.
+  // card.appendChild(img).toyImage.href index.js:160 Uncaught (in promise) TypeError: Cannot read property 'href' of undefined
+  // debugger // HITS
+
+
+  // p tag with how many likes that toy has
+  toyLikes = toy.likes
+  // debugger //HITS
+  // toyLikes = p.innerHTML
+  card.appendChild(p).toyLikes
+  // debugger //HITS   
+    // toyLikes = toy.likes //index.js:161 Uncaught (in promise) ReferenceError: Cannot access 'toyLikes' before initialization
+    // card.appendChild(img).toyImage.href
+    // debugger //DOES NOT HIT
+  
+  // button tag with a class "like-btn"
+  likeButton = button.innerHTML
+  // debugger //HITS
+  card.appendChild(button).likeButton 
+  // debugger //HITS
+
+
+  document.querySelector("toy-collection")
+  // Set to updateToyList
+  updateToyList = document.querySelector("toy-collection")
+
+}
