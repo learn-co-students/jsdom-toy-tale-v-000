@@ -1,11 +1,8 @@
+const allToysListUrl = 'http://localhost:3000/toys'
 // When the page loads, make a 'GET' request to fetch all the toy objects.
 window.onload = () => {
   fetchAllToys();
-  // toyInfo()
-
 }
-
-const allToysListUrl = 'http://localhost:3000/toys'
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -54,9 +51,13 @@ function renderToys(toy) {
 
     // create Toy Elements
     const card = document.createElement("div")
+    card.className = "card"
+    // CARD HAS TO BE APPENDED TO THE NODE ON THE WEBPAGE
+    document.getElementById("toy-collection").appendChild(card)
+
     // h2 tag with the toy's name
     const h2 = document.createElement("h2")
-    card.className = "card"
+    // card.className = "card"
     //  Displays toy name
     toyName = toy.name
     card.appendChild(h2).toyName
@@ -76,12 +77,18 @@ function renderToys(toy) {
     button.className = "like=btn"
     likeButton = button.innerHTML
     card.appendChild(button).likeButton 
-   
-    document.querySelector("toy-collection")
-    // Set to updateToyList
-    return updateToyList = document.querySelector("toy-collection")
-    // return updateToyList()
 
+    //document.getElementById("new-toy-btn").addEventListener('click', function)// function()), updateList()), addNewToy(toy))
+    // document.getElementById("breed-dropdown").addEventListener('change', removeBreeds) 
+}  
+  
+//   function updateList()
+//     // document.querySelector("toy-collection")
+//     // Set to updateToyList
+//     // updateToyList = document.querySelector("toy-collection")
+//     updateToyList = allToyListUrl.append('card')
+//     return updateToyList
+// }
 
 
 
@@ -108,7 +115,7 @@ function renderToys(toy) {
   //   console.log(json)
 
     //  debugger //Hit
-}
+// }
 
 //   const toysUrl = "http:localhost:3000/toys"
 //     fetch(toysUrl)
@@ -162,9 +169,9 @@ function addNewToy(toy) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      "name": toyInfo(toy).name.value,        //add the initial data IE THE FORM
-      "image": toyInfo(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      "likes": toyInfo(toy).toyLikes.value    //0
+      "name": renderToys(toy).name.value,        //add the initial data IE THE FORM
+      "image": renderToys(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+      "likes": renderToys(toy).toyLikes.value    //0
     })  
     // .then(resp => ).the name("input-text")
     // .then(resp => ). the image("input-text")
