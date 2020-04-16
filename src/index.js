@@ -3,11 +3,14 @@ const allToysListUrl = 'http://localhost:3000/toys'
 window.onload = () => {
   fetchAllToys();
 }
+
+
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
   const addBtn = document.querySelector("#new-toy-btn");
   const toyForm = document.querySelector(".container");
+  // Add New Toy Button Event Listener
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
     addToy = !addToy;
@@ -106,25 +109,37 @@ function renderToys(toy) {
     
     // button tag with a class "like-btn"
     // Create button
-    const button = document.createElement("like-btn")
-
+    const button = document.createElement("button")
+    // const newToyButton = document.getElementById("new-toy-btn")
     // button with a class name of "like"
     button.className = "like-btn"
+
+    // newToyButton.value = "submit"
+    // document.querySelector('new-toy-btn').appendChild(button)
 
     // Sets likeButton
     likeButton = button
 
     // Adds the innerHTML to the blikeButton to button
-    likeButton.innerHTML = button //[object HTMLElement]
+    // likeButton.formAction = button // nothing displayed
+    // likeButton.innerHTML = button //[object HTMLElement]
+    likeButton.innerHTML = "Like"
+    // likeButton.src = button // nothing displayed
 
      // Sets img attribute "src" to toyImage
-    //  button.src = likeButton
+    button.src = likeButton
+
+    // button.setAttribute("src", toyImage) 
+    //  button.setAttribute(formAction, likeButton) //index.js:129 Uncaught (in promise) ReferenceError: formAction is not defined
 
     // Appends child "button" to the parent "card"
     card.appendChild(button)
 }  
   
-function addNewToy(toy) {
+function addNewToy(event) {
+  event.preventDefault();
+  const e = event
+  // debugger //HIT
   //  a POST request is sent to http://localhost:3000/toys
   fetch("http://localhost:3000/toys", {
     method: "POST", 
@@ -133,13 +148,63 @@ function addNewToy(toy) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      "name": renderToys(toy).name.value,        //add the initial data IE THE FORM
-      "image": renderToys(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      "likes": renderToys(toy).toyLikes.value    //0
+      // "name": renderToys(toy).name.value,        //add the initial data IE THE FORM
+      // "image": renderToys(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+      // "likes": renderToys(toy).toyLikes.value    //0
+        // "name": renderToys(toyName),
+        // "image": renderToys(toyImage),
+        // "likes": renderToys(toyLikes)
+        // event.forEach(input.value)
+        e.forEach(element => console.log(element));
+
     })  
-    // .then(resp => ).the name("input-text")
-    // .then(resp => ). the image("input-text")
+
+    .then(resp => resp.json())
+      .then(json => json.forEach(toy => {
+      renderToys(toy)
+
+      // .then(resp => renderToys).toyName("input-text")
+      // .then(resp => renderToys).toyImage("input-text")
+      // .then(resp => renderToys).toyLikes("input-text")
+      // .catch(fetchAllToys)
+
 
     // ADD TO THE DOM
+  
   })
 }
+
+// function toyInfo(toy){
+//   // create Toy Elements
+//   const card = document.createElement("div")
+//   // h2 tag with the toy's name
+//   const h2 = document.createElement("h2")
+
+//   const img = document.createElement("toy-avatar")
+//   const p = document.createElement("p")
+//   const button = document.createElement("like-btn")
+
+//   // h2 tag with the toy's name
+//     //  Displays toy name
+//     toyName = toy.name
+//     card.appendChild(h2).toyName
+ 
+//   // img tag with the src of the toy's image attribute and the class name "toy-avatar"
+//   toyImage = toy.image
+//   card.appendChild(img).toyImage
+   
+//   // p tag with how many likes that toy has
+//   toyLikes = toy.likes
+ 
+//   card.appendChild(p).toyLikes
+ 
+//   // button tag with a class "like-btn"
+//   likeButton = button.innerHTML
+//   card.appendChild(button).likeButton 
+ 
+//   // document.querySelector("toy-collection")
+//   // Set to updateToyList
+//   return updateToyList = document.querySelector("toy-collection")
+//   // return updateToyList()
+
+// }
