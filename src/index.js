@@ -136,32 +136,71 @@ function renderToys(toy) {
     card.appendChild(button)
 }  
   
-function addNewToy(event) {
-  event.preventDefault();
-  const e = event
+// function addNewToy(event) {
+  function addNewToy() {
   // debugger //HIT
+  // console.log(event)
+  // event.preventDefault(); 
+  // debugger //NOT HIT
+  const e = []
+  // debugger //HITS
   //  a POST request is sent to http://localhost:3000/toys
   fetch("http://localhost:3000/toys", {
+    // fetch(fetchAllToys(), {
     method: "POST", 
     headers: {
       "Content-Type": "application/json",
       "Accept": "application/json"
     },
     body: JSON.stringify({
+      "name": renderToys(toy).name.value,        //add the initial data IE THE FORM
+      "image": renderToys(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+      "likes": renderToys(toy).toyLikes.value    //0
+    })
+      .then(resp => renderToys).toyName("input-text")
+      .then(resp => renderToys).toyImage("input-text")
+      .then(resp => renderToys).toyLikes("input-text")
+      .catch(fetchAllToys)
+
+  })
+}
+        // arr.forEach(callback(currentValue [, index [, array]])[, thisArg])
+        // event.forEach(input.value)
+        //event.forEach(element => console.log(element)); //index.js:157 Uncaught SyntaxError: Unexpected token '.'
+        // event.forEach(element => console.log(element)); //index.js:158 Uncaught SyntaxError: Unexpected token '.'
+
+        // for (let i = 0; i < items.length; i++) {
+        //   copyItems.push(items[i])
+        // }
+        // for (let i = 0; i < event.length; i ++) {
+        //   e.push(event[i])
+        // }
+
+        // event.forEach(function(toy){
+        //   e.push(toy)
+
+//         })
+        
+//     // })
+//   })
+//   // })
+// }
+// debugger //HITS
+
       // "name": renderToys(toy).name.value,        //add the initial data IE THE FORM
       // "image": renderToys(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
       // "likes": renderToys(toy).toyLikes.value    //0
         // "name": renderToys(toyName),
-        // "image": renderToys(toyImage),
+        // "image": renderToys(toyImage), 
         // "likes": renderToys(toyLikes)
         // event.forEach(input.value)
-        e.forEach(element => console.log(element));
+        // e.forEach(element => console.log(element)); //index.js:158 Uncaught SyntaxError: Unexpected token '.'
+        //event.forEach(element => console.log(element)); //index.js:159 Uncaught SyntaxError: Unexpected token '.'
+    // })  
 
-    })  
-
-    .then(resp => resp.json())
-      .then(json => json.forEach(toy => {
-      renderToys(toy)
+    // .then(resp => resp.json())
+      // .then(json => json.forEach(toy => {
+      // .then(resp =>renderToys(toy)
 
       // .then(resp => renderToys).toyName("input-text")
       // .then(resp => renderToys).toyImage("input-text")
@@ -171,8 +210,9 @@ function addNewToy(event) {
 
     // ADD TO THE DOM
   
-  })
-}
+    // })
+  // })
+// }
 
 // function toyInfo(toy){
 //   // create Toy Elements
