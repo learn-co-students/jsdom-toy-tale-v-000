@@ -12,11 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const toyForm = document.querySelector(".container");
   // Add New Toy Button Event Listener
   addBtn.addEventListener("click", () => {
-    // addNewToy(event); //ADDED
+    console.log("callForm", toyForm)
     // hide & seek with the form
     addToy = !addToy;
     if (addToy) {
       toyForm.style.display = "block";
+      toyForm.addEventListener("submit", event => { //ADDED
+        event.preventDefault()      //ADDED
+          addNewToy(event)
+      }) //ADDED
     } else {
       toyForm.style.display = "none";
     }
@@ -36,18 +40,18 @@ document.addEventListener("DOMContentLoaded", () => {
 //   })
 // })
 
-function createNewToySubmit(event) {
-  // log.textContent = `Form Submitted! Time stamp: ${event.timeStamp}`;
-  event.preventDefault();
-  // index.js:38 Uncaught TypeError: Cannot read property 'preventDefault' of undefined
-  //   at createNewToySubmit (index.js:38)
-  //   at <anonymous>:1:1
-  const createNewToyButton = document.getElementById('"create-new-toy-button"');
-  // const submit = document.getElementById('submit');
-  // createNewToyButton.addEventListener('submit', submit);
-  const toyCollection = document.getElementById("toy-collection")
-    createNewToyButton.addEventListener("submit", createNewToySubmit)
-}
+// function createNewToySubmit(event) {
+//   // log.textContent = `Form Submitted! Time stamp: ${event.timeStamp}`;
+//   event.preventDefault();
+//   // index.js:38 Uncaught TypeError: Cannot read property 'preventDefault' of undefined
+//   //   at createNewToySubmit (index.js:38)
+//   //   at <anonymous>:1:1
+//   const createNewToyButton = document.getElementById('"create-new-toy-button"');
+//   // const submit = document.getElementById('submit');
+//   // createNewToyButton.addEventListener('submit', submit);
+//   const toyCollection = document.getElementById("toy-collection")
+//     createNewToyButton.addEventListener("submit", createNewToySubmit)
+// }
 
 
 
@@ -76,9 +80,6 @@ function fetchAllToys() {
 
 
 function renderToy(toy) {
-  // DISPLAYS EACH TOY SEPERATELY
-  console.log(toy)
-
 
     // create card for each toy
     const card = document.createElement("div")
@@ -97,9 +98,6 @@ function renderToy(toy) {
     toyName = toy.name
 
     // Adds the innerHTML of the h2 to toyName
-    // h2.setAttribute("innerHTML", toyName)
-
-    // Sets the innerHTML of h2 to toyName
     h2.innerHTML = toyName
     // Appends child "h2" to the parent "card"
     card.appendChild(h2)
@@ -116,9 +114,6 @@ function renderToy(toy) {
 
     // Sets img attribute "src" to toyImage
      img.src = toyImage
-
-    //  Sets img attribute "src" to toyImage
-     // img.setAttribute("src", toyImage) //toy-avatar section on card
 
     // Appends child "img" to the parent "card"
     card.appendChild(img)
@@ -139,38 +134,39 @@ function renderToy(toy) {
     // button tag with a class "like-btn"
     // Create button
     const button = document.createElement("button")
-    // const newToyButton = document.getElementById("new-toy-btn")
+
     // button with a class name of "like"
     button.className = "like-btn"
 
-    // newToyButton.value = "submit"
-    // document.querySelector('new-toy-btn').appendChild(button)
-
     // Sets likeButton
     likeButton = button
-
-    // Adds the innerHTML to the blikeButton to button
-    // likeButton.formAction = button // nothing displayed
-    // likeButton.innerHTML = button //[object HTMLElement]
     likeButton.innerHTML = "Like"
     // likeButton.src = button // nothing displayed
 
      // Sets img attribute "src" to toyImage
     button.src = likeButton
 
-    // button.setAttribute("src", toyImage) 
-    //  button.setAttribute(formAction, likeButton) //index.js:129 Uncaught (in promise) ReferenceError: formAction is not defined
-
     // Appends child "button" to the parent "card"
     card.appendChild(button)
 }  
   
-  function addNewToy(event) {
+  function addNewToy(toyForm) {
+    event.preventDefault(); 
   // function addNewToy() {
   // debugger //HIT
-  // console.log(event)
-  // event.preventDefault(); 
-  // debugger //NOT HIT
+
+
+// index.js:163 toyform Test 
+
+// console.log(toyForm.target[0].value)
+  // callForm <div class=​"container" style=​"display:​ block;​">​…​</div>​
+    // index.js:167 Test 
+
+// console.log(toyForm.target[1].value)
+    // callForm <div class=​"container" style=​"display:​ block;​">​…​</div>​
+      // index.js:165 https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist"
+
+
   const e = []
   // debugger //HITS
   //  a POST request is sent to http://localhost:3000/toys
@@ -182,14 +178,12 @@ function renderToy(toy) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      // "name": renderToy(toy).name,        //add the initial data IE THE FORM
-      // "image": renderToy(toy).image,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      // "likes": renderToy(toy).toyLikes    //0
-
-      // "name": renderToy(toy).name.value,        //add the initial data IE THE FORM
-      // "image": renderToy(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      // "likes": renderToy(toy).toyLikes.value    //0
+      "name": toyForm.target[0].value,
+      "image" : toyForm.target[1].value,
+      "likes" : "0"
     })
+  })
+}
     // .then(resp => renderToy(h2))
     // .then(resp => renderToy(img))
     // .then(resp => renderToy(p))
@@ -206,8 +200,8 @@ function renderToy(toy) {
       // .then(resp => renderToy).toyLikes("input-text")
       // .catch(fetchAllToys)
       //.then(resp => renderToy(toy))
-  })
-}
+  // })
+// }
         // arr.forEach(callback(currentValue [, index [, array]])[, thisArg])
         // event.forEach(input.value)
         //event.forEach(element => console.log(element)); //index.js:157 Uncaught SyntaxError: Unexpected token '.'
@@ -291,4 +285,4 @@ function renderToy(toy) {
 //   return updateToyList = document.querySelector("toy-collection")
 //   // return updateToyList()
 
-// }
+// 
