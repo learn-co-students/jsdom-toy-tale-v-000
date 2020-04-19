@@ -8,10 +8,11 @@ window.onload = () => {
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
-  const addBtn = document.querySelector("#new-toy-btn");
+  const addBtn = document.querySelector("#new-toy-btn"); //ADD NEW TOY BUTTON
   const toyForm = document.querySelector(".container");
   // Add New Toy Button Event Listener
   addBtn.addEventListener("click", () => {
+    // addNewToy(event); //ADDED
     // hide & seek with the form
     addToy = !addToy;
     if (addToy) {
@@ -22,6 +23,31 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// document.addEventListener("DOMContentLoaded", () => {
+//   const createNewToyButton = document.querySelector("create-new-toy-button"); //CREAT NEW TOY BUTTON
+//   // <input type="submit" onclick="addNewToy()" name="submit" value="Create New Toy" class="submit">
+//   // <button id="new-toy-btn">Add a new toy!</button>
+//   // => MISSING button id so added it to the index.html
+//   createNewToyButton.addEventListener("click", () => {
+//     console.log(event)
+//   })
+// })
+
+function createNewToySubmit(event) {
+  // log.textContent = `Form Submitted! Time stamp: ${event.timeStamp}`;
+  event.preventDefault();
+  // index.js:38 Uncaught TypeError: Cannot read property 'preventDefault' of undefined
+  //   at createNewToySubmit (index.js:38)
+  //   at <anonymous>:1:1
+  const createNewToyButton = document.getElementById('"create-new-toy-button"');
+  // const submit = document.getElementById('submit');
+  // createNewToyButton.addEventListener('submit', submit);
+  const toyCollection = document.getElementById("toy-collection")
+    createNewToyButton.addEventListener("submit", createNewToySubmit)
+}
+
+
+
 
 function fetchAllToys() {
   //on page load, fetch all the toys using the url above 
@@ -30,12 +56,12 @@ function fetchAllToys() {
   .then(resp => resp.json())
   
   .then(json => json.forEach(toy => {
-    renderToys(toy)
+    renderToy(toy)
   }))
 
 }
 
-// function renderToys(json) {
+// function renderToy(json) {
 //   allToys = document.getElementById("toy-collection")
 //     originalToyList = Object.keys(json) //Original Toy List
 //     // iterate over the array
@@ -46,7 +72,7 @@ function fetchAllToys() {
 // }
 
 
-function renderToys(toy) {
+function renderToy(toy) {
   // DISPLAYS EACH TOY SEPERATELY
   console.log(toy)
 
@@ -136,8 +162,8 @@ function renderToys(toy) {
     card.appendChild(button)
 }  
   
-// function addNewToy(event) {
-  function addNewToy() {
+  function addNewToy(event) {
+  // function addNewToy() {
   // debugger //HIT
   // console.log(event)
   // event.preventDefault(); 
@@ -153,15 +179,30 @@ function renderToys(toy) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      "name": renderToys(toy).name.value,        //add the initial data IE THE FORM
-      "image": renderToys(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      "likes": renderToys(toy).toyLikes.value    //0
-    })
-      .then(resp => renderToys).toyName("input-text")
-      .then(resp => renderToys).toyImage("input-text")
-      .then(resp => renderToys).toyLikes("input-text")
-      .catch(fetchAllToys)
+      // "name": renderToy(toy).name,        //add the initial data IE THE FORM
+      // "image": renderToy(toy).image,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+      // "likes": renderToy(toy).toyLikes    //0
 
+      // "name": renderToy(toy).name.value,        //add the initial data IE THE FORM
+      // "image": renderToy(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+      // "likes": renderToy(toy).toyLikes.value    //0
+    })
+    // .then(resp => renderToy(h2))
+    // .then(resp => renderToy(img))
+    // .then(resp => renderToy(p))
+    // .then(resp =>renderToy(button))
+    // .catch(fetchAllToys)
+
+    // .then(resp => renderToy).toyName
+    // .then(resp => renderToy).toyImage
+    // .then(resp => renderToy).toyLikes
+    // .catch(fetchAllToys)
+
+      // .then(resp => renderToy).toyName("input-text")
+      // .then(resp => renderToy).toyImage("input-text")
+      // .then(resp => renderToy).toyLikes("input-text")
+      // .catch(fetchAllToys)
+      //.then(resp => renderToy(toy))
   })
 }
         // arr.forEach(callback(currentValue [, index [, array]])[, thisArg])
@@ -187,12 +228,12 @@ function renderToys(toy) {
 // }
 // debugger //HITS
 
-      // "name": renderToys(toy).name.value,        //add the initial data IE THE FORM
-      // "image": renderToys(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      // "likes": renderToys(toy).toyLikes.value    //0
-        // "name": renderToys(toyName),
-        // "image": renderToys(toyImage), 
-        // "likes": renderToys(toyLikes)
+      // "name": renderToy(toy).name.value,        //add the initial data IE THE FORM
+      // "image": renderToy(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+      // "likes": renderToy(toy).toyLikes.value    //0
+        // "name": renderToy(toyName),
+        // "image": renderToy(toyImage), 
+        // "likes": renderToy(toyLikes)
         // event.forEach(input.value)
         // e.forEach(element => console.log(element)); //index.js:158 Uncaught SyntaxError: Unexpected token '.'
         //event.forEach(element => console.log(element)); //index.js:159 Uncaught SyntaxError: Unexpected token '.'
@@ -200,11 +241,11 @@ function renderToys(toy) {
 
     // .then(resp => resp.json())
       // .then(json => json.forEach(toy => {
-      // .then(resp =>renderToys(toy)
+      // .then(resp =>renderToy(toy)
 
-      // .then(resp => renderToys).toyName("input-text")
-      // .then(resp => renderToys).toyImage("input-text")
-      // .then(resp => renderToys).toyLikes("input-text")
+      // .then(resp => renderToy).toyName("input-text")
+      // .then(resp => renderToy).toyImage("input-text")
+      // .then(resp => renderToy).toyLikes("input-text")
       // .catch(fetchAllToys)
 
 
