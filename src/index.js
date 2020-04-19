@@ -23,8 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// document.getElementById("create-new-toy-button").addEventListener("click", addNewToy);
+// document.querySelector("create-new-toy-button").addEventListener("click", addNewToy);
+
 // document.addEventListener("DOMContentLoaded", () => {
-//   const createNewToyButton = document.querySelector("create-new-toy-button"); //CREAT NEW TOY BUTTON
+//   const createNewToyButton = document.querySelector("create-new-toy-button"); //CREATE NEW TOY BUTTON
 //   // <input type="submit" onclick="addNewToy()" name="submit" value="Create New Toy" class="submit">
 //   // <button id="new-toy-btn">Add a new toy!</button>
 //   // => MISSING button id so added it to the index.html
