@@ -178,9 +178,14 @@ function renderToy(toy) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      "name": toyForm.target[0].value,
-      "image" : toyForm.target[1].value,
-      "likes" : "0"
+      // name = toyForm.target[0].value, // Test
+      // image = toyForm.target[1].value // https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist"
+
+      //"name": name, //index.js:184 Uncaught SyntaxError: Unexpected string
+     // "image" : image, //Uncaught SyntaxError: Unexpected string
+      // "likes" : "0" //Uncaught SyntaxError: Unexpected string
+
+      // .then(resp => (name))
     })
   })
 }
