@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const toyForm = document.querySelector(".container");
   // Add New Toy Button Event Listener
   addBtn.addEventListener("click", () => {
-    console.log("callForm", toyForm)
+    // console.log("callForm", toyForm) //ADDED
     // hide & seek with the form
     addToy = !addToy;
     if (addToy) {
@@ -152,20 +152,6 @@ function renderToy(toy) {
   
   function addNewToy(toyForm) {
     event.preventDefault(); 
-  // function addNewToy() {
-  // debugger //HIT
-
-
-// index.js:163 toyform Test 
-
-// console.log(toyForm.target[0].value)
-  // callForm <div class=​"container" style=​"display:​ block;​">​…​</div>​
-    // index.js:167 Test 
-
-// console.log(toyForm.target[1].value)
-    // callForm <div class=​"container" style=​"display:​ block;​">​…​</div>​
-      // index.js:165 https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist"
-
 
   const e = []
   // debugger //HITS
@@ -178,17 +164,44 @@ function renderToy(toy) {
       "Accept": "application/json"
     },
     body: JSON.stringify({
-      // name = toyForm.target[0].value, // Test
-      // image = toyForm.target[1].value // https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist"
-
-      //"name": name, //index.js:184 Uncaught SyntaxError: Unexpected string
-     // "image" : image, //Uncaught SyntaxError: Unexpected string
-      // "likes" : "0" //Uncaught SyntaxError: Unexpected string
-
-      // .then(resp => (name))
+      name: toyForm.target[0].value, // Test
+      image: toyForm.target[1].value // https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist"
     })
+
+// THIS POPULATES THE db.json WITH THE NEW TOY BUT DOES NOT DISPLAY THE TOY ON THE WEBPAGE ORINALLY!
+// UPON REFRESH THE NEW TOY DISPLAYS ON THE WEBPAGE
+
+    .then(resp => renderToy())
   })
 }
+
+
+    //.then(resp => renderToy(name))
+//   })
+// }
+      // .then(function(response) { //// Uncaught TypeError: JSON.stringify(...).then is not a function
+      //   return response.json();
+      // })
+     
+      // .then(resp => (name)) // Uncaught TypeError: JSON.stringify(...).then is not a function
+      // .then return response.json() //Uncaught SyntaxError: Unexpected token 'return'
+//       .catch(function(error) {
+//         alert("Bad things! Ragnarők!");
+//         console.log(error.message);
+//       })
+//     })
+// }
+    // .then(resp => renderToy(name) {//DOES NOT DISPLAY INITIAL TOYS 
+    //   return (name);
+    // }, 
+    // .then(resp => renderToy(image)
+
+    //   .then(function(response) { //Create New Toy Button not working
+    //     return response.json();
+    // })
+//   })
+// }
+
     // .then(resp => renderToy(h2))
     // .then(resp => renderToy(img))
     // .then(resp => renderToy(p))
@@ -289,5 +302,3 @@ function renderToy(toy) {
 //   // Set to updateToyList
 //   return updateToyList = document.querySelector("toy-collection")
 //   // return updateToyList()
-
-// 
