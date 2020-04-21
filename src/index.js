@@ -3,8 +3,6 @@ const allToysListUrl = 'http://localhost:3000/toys'
 window.onload = () => {
   fetchAllToys();
 }
-
-
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -39,7 +37,9 @@ function renderToy(toy) {
     const card = document.createElement("div")
       card.className = "card"
 
+      card.id = toy.id
   // CREATE TOY ELEMENTS
+
   // h2 tag with the toy's name
     //Create  h2 tag 
     const h2 = document.createElement("h2")
@@ -75,7 +75,7 @@ function renderToy(toy) {
         toyLikes = toy.likes
 
         // Adds the innerHTML to the p tag to toyLikes
-        p.innerHTML = toyLikes
+        p.innerHTML = toyLikes + " Likes"
 
           // Appends child "p" to the parent "card"-btn
         card.appendChild(p)
@@ -96,6 +96,9 @@ function renderToy(toy) {
         // Sets img attribute "src" to toyImage
         button.src = likeButton
 
+        //Like Button Event Listener
+        button.addEventListener("click", updateToyLikes)
+     
           // Appends child "button" to the parent "card"
           card.appendChild(button)
 
@@ -121,30 +124,28 @@ function renderToy(toy) {
     .then(resp => renderToy(resp))
 }
 
-
-// When a user clicks on a toy's like button, two things should happen:
-// Conditional increase to the toy's like count without reloading the page
-
-// A patch request sent to the server at http://localhost:3000/toys/:id updating the number of likes that the specific toy has
-// Headers and body are provided below (If your request isn't working, make sure your header and keys match the documentation.)
-
-  document.querySelector("#toy-collection > div:nth-child(1) > p") // JS PATH for WOODY LIKES
-// document.addEventListener("DOMContentLoaded", () => {
-//   const likeBtn = document.querySelector("#like-btn"); //Like button selector
-//   let originalLike = addNewToy(event).target[2].value + 1
-//   let updatedLike = originalLike 
-//     likeBtn.addEventListener("click", () => {
-  
-//      })
-// }
-
-        // for (let i = 0; i < items.length; i++) {
-        //   copyItems.push(items[i])
-        // }
-        // for (let i = 0; i < event.length; i ++) {
-        //   e.push(event[i])
-        // }
-//     // })
-//   })
-//   // })
-// }
+// Headers and body are provided below 
+function updateToyLikes(event) {
+  event.preventDefault();
+  // When a user clicks on a toy's like button, two things should happen:
+  //2. updating the number of likes that the specific toy has
+  let originalLike = event.target.parentElement.children[2]
+  // When a user clicks on a toy's like button, two things should happen:
+  // 2. Conditional increase to the toy's like count without reloading the page
+  let updatedLike = parseInt(originalLike.innerHTML) + 1
+  originalLike.innerHTML = updatedLike + " Likes"
+  // When a user clicks on a toy's like button, two things should happen:
+  // 1. A patch request sent to the server at http://localhost:3000/toys/:id 
+    fetch(`http://localhost:3000/toys/${event.target.parentElement.id}` , {
+    method: "PATCH", 
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    // updating the number of likes that the specific toy has
+    body: JSON.stringify({
+           likes: updatedLike
+    })
+  })
+    .then(resp => resp.json())
+}
