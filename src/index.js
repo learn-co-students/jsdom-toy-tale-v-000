@@ -12,15 +12,15 @@ document.addEventListener("DOMContentLoaded", () => {
   const toyForm = document.querySelector(".container");
   // Add New Toy Button Event Listener
   addBtn.addEventListener("click", () => {
-    // console.log("callForm", toyForm) //ADDED
     // hide & seek with the form
     addToy = !addToy;
     if (addToy) {
       toyForm.style.display = "block";
+      // Add Create New Toy Event Listener
       toyForm.addEventListener("submit", event => { //ADDED
-        event.preventDefault()      //ADDED
-          addNewToy(event)
-      }) //ADDED
+        event.preventDefault()                      //ADDED
+          addNewToy(event)                          //ADDED
+      })                                            //ADDED
     } else {
       toyForm.style.display = "none";
     }
@@ -123,12 +123,20 @@ function renderToy(toy) {
 
 
 // When a user clicks on a toy's like button, two things should happen:
-
 // Conditional increase to the toy's like count without reloading the page
+
 // A patch request sent to the server at http://localhost:3000/toys/:id updating the number of likes that the specific toy has
 // Headers and body are provided below (If your request isn't working, make sure your header and keys match the documentation.)
 
-
+  document.querySelector("#toy-collection > div:nth-child(1) > p") // JS PATH for WOODY LIKES
+// document.addEventListener("DOMContentLoaded", () => {
+//   const likeBtn = document.querySelector("#like-btn"); //Like button selector
+//   let originalLike = addNewToy(event).target[2].value + 1
+//   let updatedLike = originalLike 
+//     likeBtn.addEventListener("click", () => {
+  
+//      })
+// }
 
         // for (let i = 0; i < items.length; i++) {
         //   copyItems.push(items[i])
@@ -136,12 +144,6 @@ function renderToy(toy) {
         // for (let i = 0; i < event.length; i ++) {
         //   e.push(event[i])
         // }
-
-        // event.forEach(function(toy){
-        //   e.push(toy)
-
-//         })
-        
 //     // })
 //   })
 //   // })
