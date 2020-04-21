@@ -37,6 +37,7 @@ function renderToy(toy) {
     const card = document.createElement("div")
       card.className = "card"
 
+  // create id for each toy
       card.id = toy.id
   // CREATE TOY ELEMENTS
 
@@ -124,7 +125,6 @@ function renderToy(toy) {
     .then(resp => renderToy(resp))
 }
 
-// Headers and body are provided below 
 function updateToyLikes(event) {
   event.preventDefault();
   // When a user clicks on a toy's like button, two things should happen:
