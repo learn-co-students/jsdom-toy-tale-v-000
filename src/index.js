@@ -27,35 +27,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-// document.getElementById("create-new-toy-button").addEventListener("click", addNewToy);
-// document.querySelector("create-new-toy-button").addEventListener("click", addNewToy);
-
-// document.addEventListener("DOMContentLoaded", () => {
-//   const createNewToyButton = document.querySelector("create-new-toy-button"); //CREATE NEW TOY BUTTON
-//   // <input type="submit" onclick="addNewToy()" name="submit" value="Create New Toy" class="submit">
-//   // <button id="new-toy-btn">Add a new toy!</button>
-//   // => MISSING button id so added it to the index.html
-//   createNewToyButton.addEventListener("click", () => {
-//     console.log(event)
-//   })
-// })
-
-// function createNewToySubmit(event) {
-//   // log.textContent = `Form Submitted! Time stamp: ${event.timeStamp}`;
-//   event.preventDefault();
-//   // index.js:38 Uncaught TypeError: Cannot read property 'preventDefault' of undefined
-//   //   at createNewToySubmit (index.js:38)
-//   //   at <anonymous>:1:1
-//   const createNewToyButton = document.getElementById('"create-new-toy-button"');
-//   // const submit = document.getElementById('submit');
-//   // createNewToyButton.addEventListener('submit', submit);
-//   const toyCollection = document.getElementById("toy-collection")
-//     createNewToyButton.addEventListener("submit", createNewToySubmit)
-// }
-
-
-
-
 function fetchAllToys() {
   //on page load, fetch all the toys using the url above 
   fetch(allToysListUrl)
@@ -156,6 +127,7 @@ function renderToy(toy) {
 // Conditional increase to the toy's like count without reloading the page
 // A patch request sent to the server at http://localhost:3000/toys/:id updating the number of likes that the specific toy has
 // Headers and body are provided below (If your request isn't working, make sure your header and keys match the documentation.)
+
 
 
         // for (let i = 0; i < items.length; i++) {
