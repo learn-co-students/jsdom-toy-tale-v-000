@@ -133,13 +133,8 @@ function renderToy(toy) {
 }  
   
   function addNewToy(event) {
- 
-
-  
-  // debugger //HITS
   //  a POST request is sent to http://localhost:3000/toys
   fetch("http://localhost:3000/toys", {
-    // fetch(fetchAllToys(), {
     method: "POST", 
     headers: {
       "Content-Type": "application/json",
@@ -147,68 +142,21 @@ function renderToy(toy) {
     },
     body: JSON.stringify({
       name: event.target[0].value, // Test
-      image: event.target[1].value // https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist"
+      image: event.target[1].value, // https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist"
+      likes: 0 // 0
     })
-
-// THIS POPULATES THE db.json WITH THE NEW TOY BUT DOES NOT DISPLAY THE TOY ON THE WEBPAGE ORINALLY!
-// UPON REFRESH THE NEW TOY DISPLAYS ON THE WEBPAGE
-    
-    
-
   })
     .then(resp => resp.json())
     .then(resp => renderToy(resp))
 }
 
 
-    //.then(resp => renderToy(name))
-//   })
-// }
-      // .then(function(response) { //// Uncaught TypeError: JSON.stringify(...).then is not a function
-      //   return response.json();
-      // })
-     
-      // .then(resp => (name)) // Uncaught TypeError: JSON.stringify(...).then is not a function
-      // .then return response.json() //Uncaught SyntaxError: Unexpected token 'return'
-//       .catch(function(error) {
-//         alert("Bad things! Ragnarők!");
-//         console.log(error.message);
-//       })
-//     })
-// }
-    // .then(resp => renderToy(name) {//DOES NOT DISPLAY INITIAL TOYS 
-    //   return (name);
-    // }, 
-    // .then(resp => renderToy(image)
+// When a user clicks on a toy's like button, two things should happen:
 
-    //   .then(function(response) { //Create New Toy Button not working
-    //     return response.json();
-    // })
-//   })
-// }
+// Conditional increase to the toy's like count without reloading the page
+// A patch request sent to the server at http://localhost:3000/toys/:id updating the number of likes that the specific toy has
+// Headers and body are provided below (If your request isn't working, make sure your header and keys match the documentation.)
 
-    // .then(resp => renderToy(h2))
-    // .then(resp => renderToy(img))
-    // .then(resp => renderToy(p))
-    // .then(resp =>renderToy(button))
-    // .catch(fetchAllToys)
-
-    // .then(resp => renderToy).toyName
-    // .then(resp => renderToy).toyImage
-    // .then(resp => renderToy).toyLikes
-    // .catch(fetchAllToys)
-
-      // .then(resp => renderToy).toyName("input-text")
-      // .then(resp => renderToy).toyImage("input-text")
-      // .then(resp => renderToy).toyLikes("input-text")
-      // .catch(fetchAllToys)
-      //.then(resp => renderToy(toy))
-  // })
-// }
-        // arr.forEach(callback(currentValue [, index [, array]])[, thisArg])
-        // event.forEach(input.value)
-        //event.forEach(element => console.log(element)); //index.js:157 Uncaught SyntaxError: Unexpected token '.'
-        // event.forEach(element => console.log(element)); //index.js:158 Uncaught SyntaxError: Unexpected token '.'
 
         // for (let i = 0; i < items.length; i++) {
         //   copyItems.push(items[i])
@@ -226,64 +174,3 @@ function renderToy(toy) {
 //   })
 //   // })
 // }
-// debugger //HITS
-
-      // "name": renderToy(toy).name.value,        //add the initial data IE THE FORM
-      // "image": renderToy(toy).image.value,      //"https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      // "likes": renderToy(toy).toyLikes.value    //0
-        // "name": renderToy(toyName),
-        // "image": renderToy(toyImage), 
-        // "likes": renderToy(toyLikes)
-        // event.forEach(input.value)
-        // e.forEach(element => console.log(element)); //index.js:158 Uncaught SyntaxError: Unexpected token '.'
-        //event.forEach(element => console.log(element)); //index.js:159 Uncaught SyntaxError: Unexpected token '.'
-    // })  
-
-    // .then(resp => resp.json())
-      // .then(json => json.forEach(toy => {
-      // .then(resp =>renderToy(toy)
-
-      // .then(resp => renderToy).toyName("input-text")
-      // .then(resp => renderToy).toyImage("input-text")
-      // .then(resp => renderToy).toyLikes("input-text")
-      // .catch(fetchAllToys)
-
-
-    // ADD TO THE DOM
-  
-    // })
-  // })
-// }
-
-// function toyInfo(toy){
-//   // create Toy Elements
-//   const card = document.createElement("div")
-//   // h2 tag with the toy's name
-//   const h2 = document.createElement("h2")
-
-//   const img = document.createElement("toy-avatar")
-//   const p = document.createElement("p")
-//   const button = document.createElement("like-btn")
-
-//   // h2 tag with the toy's name
-//     //  Displays toy name
-//     toyName = toy.name
-//     card.appendChild(h2).toyName
- 
-//   // img tag with the src of the toy's image attribute and the class name "toy-avatar"
-//   toyImage = toy.image
-//   card.appendChild(img).toyImage
-   
-//   // p tag with how many likes that toy has
-//   toyLikes = toy.likes
- 
-//   card.appendChild(p).toyLikes
- 
-//   // button tag with a class "like-btn"
-//   likeButton = button.innerHTML
-//   card.appendChild(button).likeButton 
- 
-//   // document.querySelector("toy-collection")
-//   // Set to updateToyList
-//   return updateToyList = document.querySelector("toy-collection")
-//   // return updateToyList()
