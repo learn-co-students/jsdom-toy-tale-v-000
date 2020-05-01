@@ -1,3 +1,5 @@
+// Compare solutions here: https://github.com/learn-co-curriculum/jsdom-toy-tale/blob/solution/src/index.js
+
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
