@@ -1,6 +1,34 @@
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
+  function addErrorMessage(error) {
+    const errorMessage = document.createElement('p');
+    errorMessage.textContent = error.message;
+    document.body.prepend(errorMessage);
+  }
+
+  function incrementLikes(toy, numberOfLikes) {
+    let toyUrl = `http://localhost:3000/toys/${toy.id}`;
+
+    let configObj = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({
+        "likes": toy.likes + 1
+      })
+    }
+
+    fetch(toyUrl, configObj)
+      .then(response => response.json())
+      .then(function(obj) {
+        numberOfLikes.textContent = `${obj.likes} Likes `;
+      })
+      .catch(addErrorMessage);
+  }
+  
   function createToyCard(toy) {
     // Create the card
     const card = document.createElement("div");
@@ -22,11 +50,14 @@ document.addEventListener("DOMContentLoaded", () => {
     likeButton.className = "like-btn";
     likeButton.textContent = "Like <3";
 
+    // Add an event listener to the Like Button
+    likeButton.addEventListener("click", function() { incrementLikes(toy, numberOfLikes) });
+
     // Put everything together
     for (const cardPart of [toyName, toyImage, numberOfLikes, likeButton]) {
       card.appendChild(cardPart);
     }
-    toyCollection.appendChild(card);
+    toyCollection.appendChild(card); // toyCollection is defined outside of this function.
   }
 
   const addBtn = document.querySelector("#new-toy-btn");
@@ -72,10 +103,6 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch("http://localhost:3000/toys", configObject)
       .then(response => response.json())
       .then(function(toy) { createToyCard(toy) })
-      .catch(function(error) {
-        const errorMessage = document.createElement('p');
-        errorMessage.textContent = error.message;
-        document.body.prepend(errorMessage);
-      });
+      .catch(addErrorMessage);
   });
 });
