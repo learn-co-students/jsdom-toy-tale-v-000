@@ -1,8 +1,19 @@
 let addToy = false;
 
 document.addEventListener("DOMContentLoaded", () => {
+
+  fetchToys()
+
   const addBtn = document.querySelector("#new-toy-btn");
   const toyFormContainer = document.querySelector(".container");
+  
+  addBtn.addEventListener('click', function() {
+    fetchNewToy();
+  });
+  
+
+
+
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
     addToy = !addToy;
@@ -71,3 +82,33 @@ function addingLikes(numberOfLikes) {
 
 
 
+// add a new toy
+
+function fetchNewToy() {
+
+  let formData = {
+    name: document.getElementsByClassName("input-text")["name"].value,
+    image: document.getElementsByClassName("input-text")["image"].value
+  };
+
+  let configObj = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      name: document.getElementsByClassName("input-text")["name"].value,
+      image: document.getElementsByClassName("input-text")["image"].value
+    })
+
+  };
+
+  return fetch("http://localhost:3000/toys", configObj)
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(object) {
+    displayToys(object)
+  })
+}
