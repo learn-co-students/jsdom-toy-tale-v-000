@@ -47,9 +47,15 @@ document.addEventListener("DOMContentLoaded", () => {
           let newButton = document.createElement("button")
           newButton.className = "like-btn"
           newButton.innerHTML = "Like <3"
+          // newButton.setAttribute("id", )
           newDiv.appendChild(newButton)
 
+          newButton.addEventListener("click", event => {
+            console.log(newButton.id)
+
+          })
         });
+
 
 
 // not sure what to put in the body data section. where is the data coming from?
@@ -87,6 +93,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       formListener()
 
+// it's more efficient to use an individual rendertoy method that is called within
+// a rendtoys method each time in the loop
 
       function addNewToy(objToy) {
         fetch(`http://localhost:3000/toys`, {
@@ -98,21 +106,44 @@ document.addEventListener("DOMContentLoaded", () => {
 
           body: JSON.stringify(objToy)
           })
+
+          .then(function(response){
+            return response.json();
+          })
+
+          .then(function(json) {
+            console.log("json", json)
+            document.getElementById("toy-collection").innerHTML = ""
+            getToys()
+          })
       }
 
       });
 
 
-
+      //
+      // let likeButtons = document.querySelector("like-btn")
+      // console.log(likeButtons)
+      //
+      // for (let button of likeButtons) {
+      //   button.addEventListener("click")
+      // }
 
       function likeListener() {
-        document.querySelectorAll("like-btn").addEventListener("click", event => {
+        document.querySelector("like-btn").addEventListener("click", event => {
           console.log("buttons!")
+
           increaseToyLikes()
         })
       }
 
+      // likeListener()
 
+
+// have to have code to figure out which like button is being clicked
+// then what that toys number of likes is
+// increase by one
+// repost or change it
       function increaseToyLikes() {
         fetch(`http://localhost:3000/toys/:id`, {
           method: 'PATCH',
@@ -121,11 +152,13 @@ document.addEventListener("DOMContentLoaded", () => {
             Accept: "application/json"
           }
 
-          body: JSON.stringify({
-            // "likes":
-          })
+          // body: JSON.stringify({
+          //   // "likes":
+          // })
         })
       }
+
+
 
 
 
