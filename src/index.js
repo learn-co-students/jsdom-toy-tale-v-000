@@ -47,12 +47,13 @@ document.addEventListener("DOMContentLoaded", () => {
           let newButton = document.createElement("button")
           newButton.className = "like-btn"
           newButton.innerHTML = "Like <3"
-          // newButton.setAttribute("id", )
+          newButton.setAttribute("id", item.id)
           newDiv.appendChild(newButton)
 
           newButton.addEventListener("click", event => {
-            console.log(newButton.id)
+            console.log("hi", newButton)
 
+            increaseToyLikes(event)
           })
         });
 
@@ -129,13 +130,13 @@ document.addEventListener("DOMContentLoaded", () => {
       //   button.addEventListener("click")
       // }
 
-      function likeListener() {
-        document.querySelector("like-btn").addEventListener("click", event => {
-          console.log("buttons!")
-
-          increaseToyLikes()
-        })
-      }
+      // function likeListener() {
+      //   document.querySelector("like-btn").addEventListener("click", event => {
+      //     console.log("buttons!")
+      //
+      //     increaseToyLikes()
+      //   })
+      // }
 
       // likeListener()
 
@@ -144,18 +145,40 @@ document.addEventListener("DOMContentLoaded", () => {
 // then what that toys number of likes is
 // increase by one
 // repost or change it
-      function increaseToyLikes() {
-        fetch(`http://localhost:3000/toys/:id`, {
+      function increaseToyLikes(event) {
+        event.preventDefault()
+        //
+        // console.log("increase likies")
+        // console.log(event.target.parentElement.children[2].innerHTML[0])
+        // console.log(document.querySelector)
+
+        // let likeNum = event.target.parentElement.children[2].innerHTML[0] + 1
+        // let likeNum = event.target.parentElement.children[2].innerHTML[0] + 1
+        let likeNum = parseInt(event.target.parentElement.children[2].innerHTML[0]) + 1
+
+        // console.log('likeNum:', likeNum.typeOf)
+
+        fetch(`http://localhost:3000/toys/${event.target.id}`, {
           method: 'PATCH',
           headers: {
             "Content-Type": "application/json",
             Accept: "application/json"
-          }
+          },
 
-          // body: JSON.stringify({
-          //   // "likes":
-          // })
+          body: JSON.stringify({
+            "likes": likeNum
+          })
         })
+
+          // .then(function(response) {
+          //   return response.json()
+          // })
+
+          .then(response => response.json())
+          .then((response => {
+            debugger
+            event.target.parentElement.children[2].innerHTML = response.likes + " likes"
+          }))
       }
 
 
