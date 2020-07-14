@@ -16,14 +16,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   newToyForm.addEventListener("submit", (event) => {
-    debugger
     event.preventDefault()
     let formData = {
       name: event.target[0].value,
       image: event.target[1].value,
       likes: 0
     }
-    console.log("form submitted")
 
     postToy(formData)
   })
@@ -40,6 +38,8 @@ function postToy(data) {
     },
     body: JSON.stringify(data)
   })
+    .then(res => res.json())
+    .then(json => console.log(json))
 }
 
 function loadToys() {
@@ -64,7 +64,12 @@ function renderToys(data) {
     let btn = document.createElement("button") 
         btn.className = "like-btn"
         btn.innerHTML = "Like <3"
-    
+        btn.addEventListener("click", (event)=> {
+          event.preventDefault()
+          console.log("INCREMENT LIKE")
+          incrementLike(event, toy)
+        })
+
     div.appendChild(h2)
     div.appendChild(img)
     div.appendChild(p)
@@ -73,7 +78,23 @@ function renderToys(data) {
     toyCollectionContainer.appendChild(div)
   })
 }
-// On the index.html page, there is a div with the id "toy-collection."
 
-// When the page loads, make a 'GET' request to fetch all the toy objects. With the response data, make 
-// a <div class="card"> for each toy and add it to the toy-collection div.
+function incrementLike(data, toy) {
+  const num = toy.likes += 1
+
+    fetch(`http://localhost:3000/toys/${toy.id}`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        "likes": `${num}`
+      })
+    })
+    .then(res => res.json())
+    .then((toy) => {
+      data.target.previousElementSibling.innerText = `${toy.likes} Likes `
+    })
+    
+}
