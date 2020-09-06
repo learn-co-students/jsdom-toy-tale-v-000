@@ -1,9 +1,6 @@
+const addBtn = document.querySelector("#new-toy-btn");
+const toyFormContainer = document.querySelector(".container");
 let addToy = false;
-
-document.addEventListener("DOMContentLoaded", () => {
-  const addBtn = document.querySelector("#new-toy-btn");
-  const toyFormContainer = document.querySelector(".container");
- 
  
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
@@ -14,4 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
       toyFormContainer.style.display = "none";
     }
   });
-});
+
+  function getToys() {
+    console.log("toys test")
+    fetch("http://localhost:3000/toys")
+    .then(responce => responce.json())
+    .then(data => console.log(data))
+  }
+
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("Hello World!")
+  getToys();
+})
