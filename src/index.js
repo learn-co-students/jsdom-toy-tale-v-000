@@ -37,7 +37,7 @@ function getForm() {
       })
     })
   .then(responce => responce.json())
-  .then(data => console.log(data))
+  .then(data => createToy(data))
   }
 
   function getToys() {
@@ -72,8 +72,10 @@ function getForm() {
       p.innerText = `${toyObj.likes} Likes`
 
       let btn = document.createElement("button")
+      btn.addEventListener("click", updateLike)
       btn.innerText = "Like <3"
       btn.classList.add("like-btn")
+      btn.id = toyObj.id
 
       div.append(h2, img, p, btn)
       getToyDiv().appendChild(div)
@@ -83,7 +85,32 @@ function getForm() {
     return document.getElementById("toy-collection")
   }
 
-   
+  function updateLike(event) {
+
+    let id = event.currentTarget.id
+    let paragraph = event.currentTarget.previousSibling
+    let currentLike = event.currentTarget.previousSibling.innerText
+
+    currentLike = parseInt(currentLike.split(" ")[0])
+    currentLike += 1
+    console.log(currentLike)
+
+    fetch(`http://localhost:3000/toys/${id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify({
+      likes: currentLike
+    })
+  })
+    .then(responce => responce.json())
+    .then(data => {
+      paragraph.innerText = `${data.likes} Likes`
+    })
+  }
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
