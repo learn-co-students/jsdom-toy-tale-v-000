@@ -1,20 +1,43 @@
 const addBtn = document.querySelector("#new-toy-btn");
 const toyFormContainer = document.querySelector(".container");
 let addToy = false;
+
+function getForm() {
+  return document.querySelector(".add-toy-form")
+}
  
   addBtn.addEventListener("click", () => {
     // hide & seek with the form
     addToy = !addToy;
     if (addToy) {
       toyFormContainer.style.display = "block";
-      addBtn.addEventListener("click", addNewToy)
+      getForm().addEventListener("submit", addNewToy)
     } else {
       toyFormContainer.style.display = "none";
     }
   });
 
   function addNewToy(event) {
+    event.preventDefault();
+    console.log("test")
 
+    let name = document.getElementById("name-field")
+    let image = document.getElementById("image-field")
+
+    fetch("http://localhost:3000/toys", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify({
+        name: name.value,
+        image: image.value,
+        likes: 0
+      })
+    })
+  .then(responce => responce.json())
+  .then(data => console.log(data))
   }
 
   function getToys() {
@@ -60,9 +83,9 @@ let addToy = false;
     return document.getElementById("toy-collection")
   }
 
-    function getForm() {
-      return document.querySelector("#add-toy-form")
-    }
+   
+
+
 document.addEventListener("DOMContentLoaded", () => {
   console.log("Hello World!")
   getToys();
