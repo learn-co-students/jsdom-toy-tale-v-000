@@ -28,7 +28,7 @@
       "id": 5,
       "name": "Rex",
       "image": "http://umich.edu/~chemh215/W11HTML/SSG5/ssg5.2/FRex.png",
-      "likes": 1
+      "likes": 6
     },
     {
       "id": 6,
@@ -46,7 +46,44 @@
       "id": 8,
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
-      "likes": -2
+      "likes": 9
+    },
+    {
+      "name": {
+        "isTrusted": true
+      },
+      "id": 9
+    },
+    {
+      "name": {
+        "isTrusted": true
+      },
+      "likes": "0",
+      "id": 10
+    },
+    {
+      "name": "Optimus Prime",
+      "image": "https://i5.walmartimages.com/asr/f0876877-fa72-45ce-9c2c-266c24654efe_1.01034fdaba46068be2fb52645a176edd.jpeg?odnWidth=undefined&odnHeight=undefined&odnBg=ffffff",
+      "likes": 0,
+      "id": 11
+    },
+    {
+      "name": "Ryu",
+      "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRYIszud2NVsCW3WGoWQZhOsoQrzhYRiaX_B-dP3sGc2_69R_HpWa3_Vo-xQbQY8Xi4VP1-1YrQFvq-YNkMp_r5eK0KGBScxptrNrrMCxV-4I_lw4uNQfPJlQ&usqp=CAE",
+      "likes": 0,
+      "id": 12
+    },
+    {
+      "name": "Elsa",
+      "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRwI1KtOoySbsnTlIIeVK5_j2ILnhh8AYXg41sg8Zmx0n8qtHMChoY72YFikS3CZZIC5tq2ZaNU_nmnNyAd6x0aQhxn2Dw12941vluuWSe9it_yUP1QgpjD&usqp=CAE",
+      "likes": 0,
+      "id": 13
+    },
+    {
+      "name": "Genie",
+      "image": "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQO4s1MXa8iO6lr4T1Ni5nqwEbLWGBCZOAGM2fItbza1XE7r4lYmnUYGLjQFQ78L3bb4fceYchxCGeJcieu-NUtLzg9yMZCxxjSGWJ4DXFSTsqz74P6f7ab&usqp=CAE",
+      "likes": 0,
+      "id": 14
     }
   ]
 }
