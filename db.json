@@ -47,6 +47,24 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": -2
+    },
+    {
+      "name": "Jessie",
+      "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
+      "likes": 0,
+      "id": 12
+    },
+    {
+      "name": "Forky",
+      "image": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/Forky_waving.png/220px-Forky_waving.png",
+      "likes": 0,
+      "id": 14
+    },
+    {
+      "name": "Sassy",
+      "image": "https://photos.healthgrades.com/img/prov/2/4/b/24bdl_w600h400_vSyb-zfmT1U.jpg",
+      "likes": 0,
+      "id": 15
     }
   ]
 }
