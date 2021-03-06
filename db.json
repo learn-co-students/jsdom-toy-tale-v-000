@@ -4,13 +4,13 @@
       "id": 1,
       "name": "Woody",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Woody-PNG-Photos.png",
-      "likes": 5
+      "likes": 6
     },
     {
       "id": 2,
       "name": "Buzz Lightyear",
       "image": "http://www.pngmart.com/files/6/Buzz-Lightyear-PNG-Transparent-Picture.png",
-      "likes": 8
+      "likes": 9
     },
     {
       "id": 3,
@@ -40,13 +40,31 @@
       "id": 7,
       "name": "Hamm",
       "image": "https://cdn140.picsart.com/244090226021212.png?r1024x1024",
-      "likes": 0
+      "likes": 1
     },
     {
       "id": 8,
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
-      "likes": -2
+      "likes": -1
+    },
+    {
+      "name": "Stinky",
+      "image": "http://cdn.shopify.com/s/files/1/0031/5690/2000/products/172.jpg?v=1574273045",
+      "likes": 4,
+      "id": 9
+    },
+    {
+      "name": "Lightning McQueen",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/71bDAaP8NYL._AC_SX425_.jpg",
+      "likes": 1,
+      "id": 10
+    },
+    {
+      "name": "Mater",
+      "image": "https://images-na.ssl-images-amazon.com/images/I/81pZAYWzjbL._AC_SL1500_.jpg",
+      "likes": 14,
+      "id": 11
     }
   ]
 }
