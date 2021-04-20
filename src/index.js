@@ -31,9 +31,6 @@ function getToys() {
 }
 
 
-
-
-
 const toySubmit = document.querySelector('input.submit')
 
 toySubmit.addEventListener('click', function(event){
@@ -80,14 +77,46 @@ function createToy(toyObject) {
   toyCard.appendChild(toyImg);
 
   let toyLikes = document.createElement('p')
-  toyLikes.innerHTML = toyObject['likes'] + " Likes"
+  toyLikes.innerHTML = `<span>${toyObject['likes']}</span>` + " Likes"
   toyCard.appendChild(toyLikes)
 
   let toyButton = document.createElement('button')
   toyButton.className = 'like-btn'
+  toyButton.setAttribute('id', `id-${toyObject['id']}`)
   toyButton.innerText = 'Like <3'
+  toyButton.addEventListener('click', function(e) {
+    let toyId = e.target.getAttribute('id').slice(3)
+    addLike(toyId)
+  })
   toyCard.appendChild(toyButton)
 
   toyCollection.appendChild(toyCard)
 }
 
+function addLike(id) {
+  let toy = document.getElementById(`id-${id}`).parentElement
+  let toyLikes = toy.querySelector('p > span')
+  let likes = parseInt(toyLikes.innerText)
+
+  const configObj = {
+    method: 'PATCH',
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify({
+      "likes": (likes + 1)
+    })
+  }
+
+  function updateLikes(num) {
+    toyLikes.innerText = num
+  }
+
+  fetch (`http://localhost:3000/toys/${id}`, configObj)
+    .then(response => response.json())
+    .then(function(json) {
+      updateLikes(json['likes']);
+    })
+
+}
