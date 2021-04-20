@@ -25,14 +25,48 @@ function getToys() {
   .then(function(json) {
     const toyArray = json
     for (const toy of toyArray) {
-      createToys(toy)
+      createToy(toy)
     }
   })
 }
 
+
+
+
+
+const toySubmit = document.querySelector('input.submit')
+
+toySubmit.addEventListener('click', function(event){
+  let nameInput = document.querySelector('input[name="name"]').value;
+  let imgInput = document.querySelector('input[name="image"]').value
+
+  const configObj = {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: JSON.stringify({
+      "name": nameInput,
+      "image": imgInput,
+      "likes": 0
+    })
+  };
+
+  function newToy() {
+    fetch('http://localhost:3000/toys', configObj)
+    .then(response => response.json())
+    .then(function(json) {
+      createToy(json)
+    })
+  }
+
+  newToy()
+})
+
 const toyCollection = document.getElementById('toy-collection')
 
-function createToys(toyObject) {
+function createToy(toyObject) {
   let toyCard = document.createElement('div');
   toyCard.className = 'card';
 
