@@ -51,8 +51,26 @@
     {
       "name": "Jessie",
       "image": "https://vignette.wikia.nocookie.net/p__/images/8/88/Jessie_Toy_Story_3.png/revision/latest?cb=20161023024601&path-prefix=protagonist",
-      "likes": 2,
+      "likes": 5,
       "id": 9
+    },
+    {
+      "name": "Bullseye",
+      "image": "https://static.wikia.nocookie.net/heroes-and-villians/images/e/ef/IMG_0072.PNG/revision/latest/scale-to-width-down/431?cb=20171019162531",
+      "likes": 6,
+      "id": 10
+    },
+    {
+      "name": "Stinky Pete",
+      "image": "https://static.wikia.nocookie.net/pixar/images/5/57/7D156786-C8C4-405A-9077-4BF9ED7944F2.png/revision/latest?cb=20181126205811",
+      "likes": 0,
+      "id": 11
+    },
+    {
+      "name": "Mrs. Potato Head",
+      "image": "https://static.wikia.nocookie.net/heroes-and-villians/images/6/64/IMG_0075.PNG/revision/latest?cb=20171019165109",
+      "likes": 1,
+      "id": 12
     }
   ]
 }

@@ -33,9 +33,9 @@ function getToys() {
 
 const toySubmit = document.querySelector('input.submit')
 
-toySubmit.addEventListener('click', function(event){
-  let nameInput = document.querySelector('input[name="name"]').value;
-  let imgInput = document.querySelector('input[name="image"]').value
+toySubmit.addEventListener('click', function(e) {
+  let nameInput = document.querySelector('input[name="name"]');
+  let imgInput = document.querySelector('input[name="image"]');
 
   const configObj = {
     method: 'POST',
@@ -44,8 +44,8 @@ toySubmit.addEventListener('click', function(event){
       Accept: "application/json"
     },
     body: JSON.stringify({
-      "name": nameInput,
-      "image": imgInput,
+      "name": nameInput.value,
+      "image": imgInput.value,
       "likes": 0
     })
   };
@@ -56,9 +56,12 @@ toySubmit.addEventListener('click', function(event){
     .then(function(json) {
       createToy(json)
     })
-  }
+  };
 
-  newToy()
+  newToy();
+  e.preventDefault();
+  nameInput.value = '';
+  imgInput.value = ''
 })
 
 const toyCollection = document.getElementById('toy-collection')
